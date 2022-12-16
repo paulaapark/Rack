@@ -32,8 +32,8 @@ config.authenticate().then(function(){
 });
 
 
-app.post('/signup', function(req, res){
-
+app.post('/signup', upload.single('image'), function(req, res){
+    console.log(req.file);
     let plainPassword = req.body.password;
 
     bcrypt.hash(plainPassword, saltRounds, function(err, hash) {
