@@ -6,9 +6,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-button id="click-trigger">Left-Click Me</ion-button>
+<ion-popover trigger="click-trigger" triggerAction="click">
+  <ng-template>
+    <ion-content class="ion-padding">Hello World!</ion-content>
+  </ng-template>
+</ion-popover>
+
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+
+  <!-- incorporate infinite scroll to show users rack https://ionicframework.com/docs/api/infinite-scroll -->
 </ion-content>
