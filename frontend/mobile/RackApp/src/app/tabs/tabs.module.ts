@@ -6,7 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
-import { DefaultHeadComponent } from '../components/default-head/default-head.component';
+
+import { SharedModule } from '../modules/shared/shared.module';
 
 
 @NgModule({
@@ -14,8 +15,9 @@ import { DefaultHeadComponent } from '../components/default-head/default-head.co
     IonicModule,
     CommonModule,
     FormsModule,
-    TabsPageRoutingModule
+    TabsPageRoutingModule,
+    SharedModule
   ],
-  declarations: [TabsPage, DefaultHeadComponent]
+  declarations: [TabsPage]
 })
 export class TabsPageModule {}
