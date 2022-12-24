@@ -6,11 +6,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid>
-    <!-- make this sticky and make the top 4 items fit in one row, horizontal scrolling if not -->
+  <ion-grid class="sticky-top">
     <ion-row>
       <ion-col>
-        <ion-button id="click-season" fill="clear"><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-button>
+        <ion-button id="click-season" fill="clear" size="small"><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-button>
         <ion-popover trigger="click-season" triggerAction="click">
           <ng-template>
             <ion-content class="ion-padding">
@@ -36,7 +35,7 @@
           </ng-template>
         </ion-popover>
       </ion-col>
-      <ion-col><ion-button id="click-type" fill="clear"><ion-icon name="shirt-outline"></ion-icon> Type</ion-button>
+      <ion-col><ion-button id="click-type" fill="clear" size="small"><ion-icon name="shirt-outline"></ion-icon> Type</ion-button>
         <ion-popover trigger="click-type" triggerAction="click">
           <ng-template>
             <ion-content class="ion-padding">
@@ -53,19 +52,32 @@
             </ion-content>
           </ng-template>
         </ion-popover></ion-col>
-      <ion-col><ion-button disabled fill="clear"><ion-icon
+      <ion-col><ion-button disabled fill="clear" size="small"><ion-icon
             name="color-palette-outline"></ion-icon>Color</ion-button></ion-col>
-      <ion-col><ion-button disabled fill="clear"><ion-icon
+      <ion-col><ion-button disabled fill="clear" size="small"><ion-icon
             name="sparkles-outline"></ion-icon>Style</ion-button></ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><ion-button disabled fill="clear"><ion-icon
+      <ion-col><ion-button disabled fill="clear" size="small"><ion-icon
             name="bookmark-outline"></ion-icon>Save</ion-button></ion-col>
-      <ion-col><ion-button fill="clear"><ion-icon name="funnel-outline"></ion-icon>Filter</ion-button></ion-col>
+      <ion-col><ion-button fill="clear" size="small"><ion-icon name="funnel-outline"></ion-icon>Filter</ion-button></ion-col>
     </ion-row>
   </ion-grid>
 
   <!-- interpolate all of the users Rack items, data binding stuff -->
+  <ion-card>
+    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+    <ion-card-header>
+      <ion-card-title>Title</ion-card-title>
+      <ion-card-subtitle>#type #season</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Description **** DEFAULT HIDDEN? until clicked <br>
+      <ion-button slot="icon-only" fill="clear"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+    </ion-card-content>
+  </ion-card>
+
   <ion-card>
     <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
     <ion-card-header>
@@ -144,6 +156,8 @@
           <ion-button>Add to Rack!</ion-button>
           <!-- add validation. Description not req'd-->
         </div>
+        <br>
+        <br>
         <ion-text>Don't sweat! Edit your Rack anytime!</ion-text>
       </ion-content>
     </ng-template>
