@@ -1,25 +1,4 @@
 <ion-app>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-button>
-          <ion-icon slot="icon-only" name="camera"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-buttons slot="end">
-        <ion-button>
-          <ion-icon slot="icon-only" name="person-circle"></ion-icon>
-          <!-- what about making this the ion avatar <ion-avatar>
-    <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-  </ion-avatar> -->
-        </ion-button>
-        <ion-button>
-          <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>RACK</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-router-outlet></ion-router-outlet>
+    <app-default-head></app-default-head>
+    <ion-router-outlet></ion-router-outlet>
 </ion-app>
