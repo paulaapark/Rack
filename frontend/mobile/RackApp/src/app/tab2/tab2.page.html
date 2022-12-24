@@ -6,8 +6,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid> 
-    <!-- make this sticky -->
+  <ion-grid>
+    <!-- make this sticky and make the top 4 items fit in one row, horizontal scrolling if not -->
     <ion-row>
       <ion-col>
         <ion-button id="click-season" fill="clear"><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-button>
@@ -53,25 +53,99 @@
             </ion-content>
           </ng-template>
         </ion-popover></ion-col>
-      <ion-col><ion-button disabled fill="clear"><ion-icon name="color-palette-outline"></ion-icon>Color</ion-button></ion-col>
-      <ion-col><ion-button disabled fill="clear"><ion-icon name="sparkles-outline"></ion-icon>Style</ion-button></ion-col>
+      <ion-col><ion-button disabled fill="clear"><ion-icon
+            name="color-palette-outline"></ion-icon>Color</ion-button></ion-col>
+      <ion-col><ion-button disabled fill="clear"><ion-icon
+            name="sparkles-outline"></ion-icon>Style</ion-button></ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><ion-button disabled fill="clear"><ion-icon name="bookmark-outline"></ion-icon>Save</ion-button></ion-col>
+      <ion-col><ion-button disabled fill="clear"><ion-icon
+            name="bookmark-outline"></ion-icon>Save</ion-button></ion-col>
       <ion-col><ion-button fill="clear"><ion-icon name="funnel-outline"></ion-icon>Filter</ion-button></ion-col>
     </ion-row>
   </ion-grid>
 
+  <!-- interpolate all of the users Rack items, data binding stuff -->
+  <ion-card>
+    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+    <ion-card-header>
+      <ion-card-title>Title</ion-card-title>
+      <ion-card-subtitle>#type #season</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Description **** DEFAULT HIDDEN? until clicked <br>
+      <ion-button slot="icon-only" fill="clear"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+    </ion-card-content>
+  </ion-card>
+  <!-- incorporate infinite scroll to show users rack? https://ionicframework.com/docs/api/infinite-scroll -->
 
-    <!-- incorporate infinite scroll to show users rack https://ionicframework.com/docs/api/infinite-scroll -->
 
-
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" id="new-rack-modal">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-
-
+  <ion-modal trigger="new-rack-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Later</ion-button>
+          </ion-buttons>
+          <ion-title>RACK</ion-title> <!-- title will become logo image -->
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Done</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <br>
+        <br>
+        <ion-text>
+          <h3>Getting Organized!</h3>
+        </ion-text>
+        <br>
+        <div>
+          <ion-list>
+            <ion-item>
+              <ion-label>Title</ion-label>
+              <ion-input placeholder=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Description</ion-label>
+              <ion-input placeholder=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Season</ion-label>
+              <ion-input placeholder=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Type</ion-label>
+              <ion-input placeholder=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Color</ion-label>
+              <ion-input disabled placeholder=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Style</ion-label>
+              <ion-input disabled placeholder=""></ion-input>
+            </ion-item>
+          </ion-list>
+          <br>
+          <ion-chip>
+            <ion-icon name="image-outline" color="primary"></ion-icon>
+            <ion-label>Import or capture new image </ion-label>
+          </ion-chip>
+          <!-- link action sheet to the chip -->
+          <br>
+          <br>
+          <ion-button>Add to Rack!</ion-button>
+          <!-- add validation. Description not req'd-->
+        </div>
+        <ion-text>Don't sweat! Edit your Rack anytime!</ion-text>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
