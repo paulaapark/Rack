@@ -1,19 +1,21 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-default-head></app-default-head>
 
 <ion-content [fullscreen]="true">
+  <br>
   <h2 class="title-theme">Outfit Builder</h2>
   <h5>FirstName X RACK Collab</h5>
+  <br>
   
-  <!-- img isnt showing up... color issue? it works in an ionicon but not as ion-img. as embed it has a white bg... -->
-  <img src="assets/icon/closet.svg" class="closet">
+  <ion-card>
+    <img alt="closet" src="assets/icon/closet.svg" />
+    <ion-card-content>
+      <ion-button expand="block">Start!</ion-button>
+    </ion-card-content>
+  </ion-card>
+
   <!-- put a progress bar thing here after the form... on the toolbar top thing? 
     https://ionicframework.com/docs/api/progress-bar -->
 
-  <ion-button>Start!</ion-button>
+  
     
 </ion-content>
