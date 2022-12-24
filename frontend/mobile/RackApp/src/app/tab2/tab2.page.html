@@ -6,10 +6,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid>
+  <ion-grid> 
+    <!-- make this sticky -->
     <ion-row>
       <ion-col>
-        <ion-button id="click-season">Season</ion-button>
+        <ion-button id="click-season" fill="clear"><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-button>
         <ion-popover trigger="click-season" triggerAction="click">
           <ng-template>
             <ion-content class="ion-padding">
@@ -35,7 +36,7 @@
           </ng-template>
         </ion-popover>
       </ion-col>
-      <ion-col><ion-button id="click-type">Type</ion-button>
+      <ion-col><ion-button id="click-type" fill="clear"><ion-icon name="shirt-outline"></ion-icon> Type</ion-button>
         <ion-popover trigger="click-type" triggerAction="click">
           <ng-template>
             <ion-content class="ion-padding">
@@ -52,19 +53,17 @@
             </ion-content>
           </ng-template>
         </ion-popover></ion-col>
-      <ion-col><ion-button disabled>Color</ion-button></ion-col>
-      <ion-col><ion-button disabled>Style</ion-button></ion-col>
+      <ion-col><ion-button disabled fill="clear"><ion-icon name="color-palette-outline"></ion-icon>Color</ion-button></ion-col>
+      <ion-col><ion-button disabled fill="clear"><ion-icon name="sparkles-outline"></ion-icon>Style</ion-button></ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><ion-button disabled><ion-icon name="bookmark-outline"></ion-icon>Save</ion-button></ion-col>
-      <ion-col><ion-button>
-        <ion-icon><i class="bi bi-funnel"></i></ion-icon> 
-        Filter</ion-button></ion-col>
+      <ion-col><ion-button disabled fill="clear"><ion-icon name="bookmark-outline"></ion-icon>Save</ion-button></ion-col>
+      <ion-col><ion-button fill="clear"><ion-icon name="funnel-outline"></ion-icon>Filter</ion-button></ion-col>
     </ion-row>
   </ion-grid>
 
 
-  
+    <!-- incorporate infinite scroll to show users rack https://ionicframework.com/docs/api/infinite-scroll -->
 
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
@@ -74,5 +73,5 @@
   </ion-fab>
 
 
-  <!-- incorporate infinite scroll to show users rack https://ionicframework.com/docs/api/infinite-scroll -->
+
 </ion-content>

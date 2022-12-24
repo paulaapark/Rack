@@ -6,30 +6,29 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-text> <!-- do interpolation for these lines -->
-    <h4 class="quote">"Good TimeOfDay, FirstName"</h4>
-    <p class="quote">"Another day, another outfit!"</p>
-  </ion-text>
+  <!-- do interpolation for these lines -->
+  <h4 class="quote">Good "TimeOfDay", "FirstName"!</h4>
+  <h5 class="quote">"Another day, another outfit!"</h5>
   
   <ion-grid>
     <ion-row>
       <ion-col> 
         <!-- give this card an <a> router link thing -->
           <ion-card>
-            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
             <ion-card-header>
-              <ion-card-title>Rack Stats</ion-card-title>
+              <ion-icon name="bar-chart-outline" size="large"></ion-icon>
             </ion-card-header>
+            <ion-card-content>Rack Stats</ion-card-content>
           </ion-card>
       </ion-col>
       
       <ion-col> <!-- make sure to indicate this card as disabled-->
-          <ion-card>
-            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-            <ion-card-header>
-              <ion-card-title>My Wish Rack</ion-card-title>
-            </ion-card-header>
-          </ion-card>
+        <ion-card>
+          <ion-card-header>
+            <ion-icon name="heart-outline" size="large"></ion-icon>
+          </ion-card-header>
+          <ion-card-content>My Wish Rack</ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
