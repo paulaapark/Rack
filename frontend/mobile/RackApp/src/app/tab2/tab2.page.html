@@ -63,13 +63,12 @@
   <ion-card>
     <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
     <ion-card-header>
-      <ion-card-title>Title</ion-card-title>
+      <ion-card-title>Title </ion-card-title>
       <ion-card-subtitle>#type #season</ion-card-subtitle>
     </ion-card-header>
-  
     <ion-card-content>
-      Description **** DEFAULT HIDDEN? until clicked <br>
-      <ion-button slot="icon-only" fill="clear"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+      <ion-button slot="icon-only" fill="clear"><ion-icon name="information-circle-outline"></ion-icon></ion-button>
+      <!-- try using a grid and columns to get this icon on the same lvl as the card header and have no content at all? -->
     </ion-card-content>
   </ion-card>
 
@@ -81,8 +80,7 @@
     </ion-card-header>
   
     <ion-card-content>
-      Description **** DEFAULT HIDDEN? until clicked <br>
-      <ion-button slot="icon-only" fill="clear"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+      <ion-button slot="icon-only" fill="clear"><ion-icon name="information-circle-outline"></ion-icon></ion-button>
     </ion-card-content>
   </ion-card>
   <!-- incorporate infinite scroll to show users rack? https://ionicframework.com/docs/api/infinite-scroll -->
@@ -110,7 +108,7 @@
         <br>
         <br>
         <ion-text>
-          <h3>Getting Organized!</h3>
+          <h2 class="title-theme">Getting Organized!</h2>
         </ion-text>
         <br>
         <div>
@@ -124,26 +122,27 @@
               <ion-input placeholder=""></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label>Season</ion-label>
+              <ion-label><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-label>
               <ion-input placeholder=""></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label>Type</ion-label>
+              <ion-label><ion-icon name="shirt-outline"></ion-icon>Type</ion-label>
               <ion-input placeholder=""></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label>Color</ion-label>
+              <ion-label><ion-icon name="color-palette-outline"></ion-icon>Color</ion-label>
               <ion-input disabled placeholder=""></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label>Style</ion-label>
+              <ion-label><ion-icon name="sparkles-outline"></ion-icon>Style</ion-label>
               <ion-input disabled placeholder=""></ion-input>
             </ion-item>
           </ion-list>
           <br>
-          <ion-chip>
+          <!-- show thumbnail of uploaded img here? or name of image file -->
+          <ion-chip (click)="presentActionSheet()">
             <ion-icon name="image-outline" color="primary"></ion-icon>
-            <ion-label>Import or capture new image </ion-label>
+            <ion-label>Upload new clothing image(s) </ion-label>
           </ion-chip>
           <!-- link action sheet to the chip -->
           <br>
