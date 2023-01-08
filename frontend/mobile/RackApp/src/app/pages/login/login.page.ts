@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -24,8 +25,27 @@ export class LoginPage {
   //     this.message = `Hello, ${ev.detail.data}!`;
   //   }
   // }
-  constructor() { }
+  constructor(private alertController: AlertController) { }
 
+  async presentLogin() {
+    const alert = await this.alertController.create({
+      header: 'Log In',
+      buttons: ["Let's Go!"],
+      inputs: [
+        {
+          placeholder: 'Email',
+        },
+        {
+          placeholder: 'Password',
+          // attributes: {
+          //   maxlength: 8,
+          // },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 
 
 }

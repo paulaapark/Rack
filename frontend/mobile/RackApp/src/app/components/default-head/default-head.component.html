@@ -11,7 +11,7 @@
   <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-button slot="icon-only" (click)="presentActionSheet()">
+        <ion-button slot="icon-only" (click)="takePicture()">
           <ion-icon  name="camera-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -25,8 +25,9 @@
           <ion-icon  name="ellipsis-vertical"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title>RACK</ion-title>
-      <!-- this title needs to become the image logo.. use image binding? -->
+      <img src="assets/icon/rack-logo-1.svg" alt="">
     </ion-toolbar>
   </ion-header>
 </div>
+
+<!-- <img [src]="imageURL"> -->
