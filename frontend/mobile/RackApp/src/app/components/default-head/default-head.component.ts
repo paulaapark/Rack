@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraResultType } from '@capacitor/camera';
 
 @Component({
@@ -12,37 +12,7 @@ export class DefaultHeadComponent implements OnInit {
 
   imageUrl:string|undefined = '';
 
-  constructor(private actionSheetCtrl: ActionSheetController) {}
-    // async presentActionSheet() {
-    //   const actionSheet = await this.actionSheetCtrl.create({
-    //     header: 'Do you wish to import or capture a new image?',
-    //     subHeader: 'Attach up to 3 images for a new Rack item!',
-    //     buttons: [
-    //       {
-    //         text: 'Import',
-    //         data: {
-    //           action: 'import',
-    //         },
-    //       },
-    //       {
-    //         text: 'Capture',
-    //         data: {
-    //           action: 'capture',
-    //         },
-    //       },
-    //       {
-    //         text: 'Cancel',
-    //         role: 'cancel',
-    //         data: {
-    //           action: 'cancel',
-    //         },
-    //       },
-    //     ],
-    //   });
-  
-    //   await actionSheet.present();
-    // }
-
+  constructor(private router:Router) {}
     takePicture(){
       const snapPicture = async () => {
         const image = await Camera.getPhoto({
