@@ -11,22 +11,33 @@
   <br>
   <ion-grid>
     <ion-row>
-      <ion-col> 
+      <ion-col>
         <!-- give this card an <a> router link thing -->
+        <br>
           <ion-card>
             <ion-card-header>
-              <ion-icon name="bar-chart-outline" size="large"></ion-icon>
+              <ion-button fill="clear" size="large">
+                <a routerLink="../../stats">
+              <ion-icon name="bar-chart-outline" size="large"></ion-icon></a>
+            </ion-button><br>
+            <ion-label>Rack Stats</ion-label>
             </ion-card-header>
-            <ion-card-content>Rack Stats</ion-card-content>
+            <!-- <ion-card-content>Rack Stats</ion-card-content> -->
           </ion-card>
+
       </ion-col>
-      
+
       <ion-col> <!-- make sure to indicate this card as disabled-->
+      Coming Soon!
         <ion-card>
           <ion-card-header>
-            <ion-icon name="heart-outline" size="large"></ion-icon>
+            <ion-button disabled fill="clear" size="large">
+                <ion-icon name="heart-outline" size="large"></ion-icon>
+          </ion-button><br>
+          <ion-label>Wish Rack</ion-label>
+            
           </ion-card-header>
-          <ion-card-content>My Wish Rack</ion-card-content>
+          <!-- <ion-card-content>My Wish Rack - Coming Soon!</ion-card-content> -->
         </ion-card>
       </ion-col>
     </ion-row>
