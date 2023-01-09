@@ -10,11 +10,21 @@
   <ion-list>
     <ion-item>
       <ion-label><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-label>
-      <ion-input placeholder=""></ion-input>
+      <ion-select interface="popover" placeholder="" [multiple]="true">
+        <ion-select-option value="spring">Spring</ion-select-option>
+        <ion-select-option value="summer">Summer</ion-select-option>
+        <ion-select-option value="fall">Fall</ion-select-option>
+        <ion-select-option value="winter">Winter</ion-select-option>
+        <ion-select-option value="wild">Let Rack Decide!</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label><ion-icon name="shirt-outline"></ion-icon>Type</ion-label>
-      <ion-input placeholder=""></ion-input>
+      <ion-select interface="popover" placeholder="" [multiple]="true">
+        <ion-select-option value="top">Top</ion-select-option>
+        <ion-select-option value="bottom">Bottom</ion-select-option>
+        <ion-select-option value="wild">Let Rack Decide!</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label><ion-icon name="color-palette-outline"></ion-icon>Color - Coming Soon!</ion-label>
