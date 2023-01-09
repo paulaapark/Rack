@@ -7,16 +7,13 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 
-import { SharedModule } from '../modules/shared/shared.module';
-
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    TabsPageRoutingModule,
-    SharedModule
+    TabsPageRoutingModule
   ],
   declarations: [TabsPage]
 })

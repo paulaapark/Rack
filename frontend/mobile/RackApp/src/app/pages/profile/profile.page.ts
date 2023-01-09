@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 @Component({
   selector: 'app-profile',
