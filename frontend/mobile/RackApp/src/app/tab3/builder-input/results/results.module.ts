@@ -4,22 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { BuilderInputPageRoutingModule } from './builder-input-routing.module';
+import { ResultsPageRoutingModule } from './results-routing.module';
 
-import { BuilderInputPage } from './builder-input.page';
+import { ResultsPage } from './results.page';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
-
-
-
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BuilderInputPageRoutingModule,
+    ResultsPageRoutingModule,
     SharedModule
   ],
-  declarations: [BuilderInputPage]
+  declarations: [ResultsPage]
 })
-export class BuilderInputPageModule {}
+export class ResultsPageModule {}

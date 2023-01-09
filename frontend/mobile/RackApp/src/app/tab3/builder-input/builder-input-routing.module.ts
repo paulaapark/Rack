@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: BuilderInputPage
+  },
+  {
+    path: 'results',
+    loadChildren: () => import('./results/results.module').then( m => m.ResultsPageModule)
   }
 ];
 

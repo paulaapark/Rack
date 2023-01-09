@@ -35,6 +35,10 @@ const routes: Routes = [
     redirectTo: '/tabs/tab1',
     pathMatch: 'full'
   },
+  {
+    path: 'item-info',
+    loadChildren: () => import('./item-info/item-info.module').then( m => m.ItemInfoPageModule)
+  },
   
 ];
 
