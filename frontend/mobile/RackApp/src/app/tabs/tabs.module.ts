@@ -4,8 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { TabsPageRoutingModule } from './tabs-routing.module';
+import { SharedModule } from '../modules/shared/shared.module';
 
-import { TabsPage } from './tabs.page';
+// import { TabsPage } from './tabs.page';
 
 
 @NgModule({
@@ -13,8 +14,10 @@ import { TabsPage } from './tabs.page';
     IonicModule,
     CommonModule,
     FormsModule,
-    TabsPageRoutingModule
+    TabsPageRoutingModule,
+    SharedModule
   ],
-  declarations: [TabsPage]
+  declarations: []
+  //was declaring TabsPage here before but moved it to shared module 
 })
 export class TabsPageModule {}

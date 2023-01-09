@@ -2,16 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { DefaultHeadComponent } from 'src/app/components/default-head/default-head.component';
-import { TabsPageModule } from 'src/app/tabs/tabs.module';
+import { TabsPage } from 'src/app/tabs/tabs.page';
+import { TabsPageRoutingModule } from 'src/app/tabs/tabs-routing.module';
+
+
 
 
 @NgModule({
-  declarations: [ DefaultHeadComponent ],
+  declarations: [ DefaultHeadComponent, TabsPage ],
   imports: [
     CommonModule,
     IonicModule,
-    TabsPageModule
+    TabsPageRoutingModule
   ],
-  exports: [ DefaultHeadComponent ],
+  exports: [ DefaultHeadComponent, TabsPage ],
 })
 export class SharedModule { }
