@@ -4,7 +4,8 @@
   <ion-grid class="sticky-top">
     <ion-row>
       <ion-col>
-        <ion-button id="click-season" fill="clear" size="small"><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-button>
+        <ion-button id="click-season" fill="clear" size="small"><ion-icon
+            name="partly-sunny-outline"></ion-icon>Season</ion-button>
         <ion-popover trigger="click-season" triggerAction="click">
           <ng-template>
             <ion-content class="ion-padding">
@@ -30,7 +31,8 @@
           </ng-template>
         </ion-popover>
       </ion-col>
-      <ion-col><ion-button id="click-type" fill="clear" size="small"><ion-icon name="shirt-outline"></ion-icon> Type</ion-button>
+      <ion-col><ion-button id="click-type" fill="clear" size="small"><ion-icon name="shirt-outline"></ion-icon>
+          Type</ion-button>
         <ion-popover trigger="click-type" triggerAction="click">
           <ng-template>
             <ion-content class="ion-padding">
@@ -55,36 +57,38 @@
     <ion-row>
       <ion-col><ion-button disabled fill="clear" size="small"><ion-icon
             name="bookmark-outline"></ion-icon>Save</ion-button></ion-col>
-      <ion-col><ion-button fill="clear" size="small"><ion-icon name="funnel-outline"></ion-icon>Filter</ion-button></ion-col>
+      <ion-col><ion-button fill="clear" size="small"><ion-icon
+            name="funnel-outline"></ion-icon>Filter</ion-button></ion-col>
     </ion-row>
   </ion-grid>
 
   <!-- interpolate all of the users Rack items, data binding stuff -->
-  <ion-card>
-    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-    <ion-card-header>
-      <ion-card-title>Title </ion-card-title>
-      <ion-card-subtitle>#type #season</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-button slot="icon-only" fill="clear"><ion-icon name="information-circle-outline"></ion-icon></ion-button>
-      <!-- try using a grid and columns to get this icon on the same lvl as the card header and have no content at all? -->
-    </ion-card-content>
-  </ion-card>
+  <div class="ion-padding">
+    <ion-card>
+      <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+      <ion-card-header>
+        <ion-card-title>Title </ion-card-title>
+        <ion-card-subtitle>#type #season</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button slot="icon-only" fill="clear"><ion-icon name="information-circle-outline"></ion-icon></ion-button>
+        <!-- try using a grid and columns to get this icon on the same lvl as the card header and have no content at all? -->
+      </ion-card-content>
+    </ion-card>
 
-  <ion-card>
-    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-    <ion-card-header>
-      <ion-card-title>Title</ion-card-title>
-      <ion-card-subtitle>#type #season</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <ion-button slot="icon-only" fill="clear"><ion-icon name="information-circle-outline"></ion-icon></ion-button>
-    </ion-card-content>
-  </ion-card>
-  <!-- incorporate infinite scroll to show users rack? https://ionicframework.com/docs/api/infinite-scroll -->
+    <ion-card>
+      <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+      <ion-card-header>
+        <ion-card-title>Title</ion-card-title>
+        <ion-card-subtitle>#type #season</ion-card-subtitle>
+      </ion-card-header>
 
+      <ion-card-content>
+        <ion-button slot="icon-only" fill="clear"><ion-icon name="information-circle-outline"></ion-icon></ion-button>
+      </ion-card-content>
+    </ion-card>
+    <!-- incorporate infinite scroll to show users rack? https://ionicframework.com/docs/api/infinite-scroll -->
+  </div>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" id="new-rack-modal">
     <ion-fab-button>

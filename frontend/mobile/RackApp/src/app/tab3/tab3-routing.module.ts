@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: Tab3Page,
+  },
+  {
+    path: 'builder-input',
+    loadChildren: () => import('./builder-input/builder-input.module').then( m => m.BuilderInputPageModule)
   }
 ];
 
