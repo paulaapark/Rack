@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { StatsPageRoutingModule } from './stats-routing.module';
 
 import { StatsPage } from './stats.page';
+
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 @NgModule({
