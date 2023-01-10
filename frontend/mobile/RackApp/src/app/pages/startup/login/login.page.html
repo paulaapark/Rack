@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [fullscreen]="true" class="ion-padding">
   <br>
   <br>
   <br>
@@ -7,12 +7,7 @@
   <p>Whats on your...</p>
   <img src="assets/icon/rack-logo-1.svg" alt="">
   <br>
-  <br>
-  <br>
-  <ion-button >Log In</ion-button><br>
- 
- <span>
-    Log In
+    <h2>Log In</h2>
     <ion-list>
       <ion-item>
         <ion-label>Email</ion-label>
@@ -25,9 +20,12 @@
       </ion-item>
     </ion-list>
     <br>
-    <ion-button expand="block">Let's Go!</ion-button>
-    <ion-text>Don't have an account? Sign Up! MODAL HERE TOO</ion-text>
+    <ion-button expand="block" routerLink="../../tabs">Let's Go!</ion-button>
+    <ion-text>Don't have an account? <a routerLink="../signup">Sign Up!</a></ion-text>
+
+    <br>
+    <br>
+    <br>
     <ion-text>Powered by Paula Anderson</ion-text>
-  </span>
-  <ion-text>Powered by Paula Anderson</ion-text>
+  
 </ion-content>

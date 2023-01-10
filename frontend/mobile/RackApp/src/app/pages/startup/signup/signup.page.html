@@ -1,9 +1,50 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>signup</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="../../startup">Later</ion-button>
+    </ion-buttons>
+    <ion-title>RACK</ion-title> <!-- title will become logo image -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding" [fullscreen]="true">
+  <ion-text>
+    <h3>Sign Up</h3>
+  (it's free!)</ion-text>
+  <br>
+  <br>
+  <ion-list>
+    <ion-item>
+      <ion-label>First Name</ion-label>
+      <ion-input placeholder=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Last Name</ion-label>
+      <ion-input placeholder=""></ion-input>
+    </ion-item>
 
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input type="email" placeholder=""></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" value=""></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Confirm Password</ion-label>
+      <ion-input type="password" value=""></ion-input>
+    </ion-item>
+
+    <!-- add validation. Last name not req'd but everything else is -->
+  </ion-list>
+  <br>
+  <ion-button expand="block" routerLink="../login">Let's Get Started!</ion-button>
+  <br>
+  <ion-text>Already have an account? <a routerLink="../login">Log in!</a> </ion-text>
+  <br>
+  <br>
+  <ion-text>Powered by Paula Anderson</ion-text>
 </ion-content>
