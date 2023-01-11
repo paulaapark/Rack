@@ -17,7 +17,7 @@ export class StatsPage implements OnInit {
 }
 
 
-// Reference:
+// Reference Code:
 //
 // import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 // import { Chart } from 'chart.js';
