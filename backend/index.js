@@ -1,7 +1,12 @@
 const express = require('express');
 const app = express();
 const config = require('./config');
+
+const User = require('./models/user');
+
 const cors = require('cors');
+
+
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -13,17 +18,17 @@ app.use(express.json());
 app.use(express.static('uploads')); //This makes our uploads folder public
 
 //Configure Multer
-let storage = multer.diskStorage({
-    destination: (req, file, cb) => {    
-      cb(null, './uploads'); //Defining where uploads images should be stored
-    },
-    filename: (req, file, cb) => {
-      cb(null, file.originalname); //Name of the uploaded file
-    }
-  });
-  let upload = multer({
-    storage: storage
-  });
+// let storage = multer.diskStorage({
+//     destination: (req, file, cb) => {    
+//       cb(null, './uploads'); //Defining where uploads images should be stored
+//     },
+//     filename: (req, file, cb) => {
+//       cb(null, file.originalname); //Name of the uploaded file
+//     }
+//   });
+//   let upload = multer({
+//     storage: storage
+//   });
 
 config.authenticate().then(function(){
     console.log('Database is connected.');
@@ -32,16 +37,19 @@ config.authenticate().then(function(){
 });
 
 
-app.post('/signup', upload.single('image'), function(req, res){
-    console.log(req.file);
+app.get('/signup', function(req, res){ 
+})
+
+app.post('/signup', function(req, res){
+    
     let plainPassword = req.body.password;
 
     bcrypt.hash(plainPassword, saltRounds, function(err, hash) {
         
         let user_data = {
-            first_name: req.body.FirstName,
-            last_name: req.body.LastName,
-            email: req.body.email,
+            FirstName: req.body.FirstName,
+            LastName: req.body.LastName,
+            email: req.body.Email,
             password: hash
         };
 

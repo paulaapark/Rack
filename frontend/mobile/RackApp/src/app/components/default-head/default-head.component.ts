@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 
 import { Camera, CameraResultType } from '@capacitor/camera';
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 @Component({
   selector: 'app-default-head',
@@ -35,7 +36,14 @@ export class DefaultHeadComponent implements OnInit {
       snapPicture();
     }
 
+    // async scheduleNotification(){
+    //   await LocalNotifications.schedule([
+    //     {title: "Test title", body: "Test Content", id: 1, schedule: null}
+    //   ]);
+    // } THIS DOESNT WORK CUZ THEY DIDNT PUT THE EXAMPLE IN THE IONIC 6 DOCUMENTATION FOR NATIVE PLUGINS
+
   ngOnInit() {}
+
   
   
 }

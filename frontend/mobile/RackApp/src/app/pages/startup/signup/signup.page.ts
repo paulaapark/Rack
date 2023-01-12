@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { error } from 'console';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -14,11 +15,11 @@ export class SignupPage implements OnInit {
 
   constructor(private service:UserService, private formBuilder: FormBuilder) { 
     this.signupForm = formBuilder.group({
-      first_name: ['', [Validators.required]],
-      last_name: ['', [Validators.required]],
+      FirstName: ['', [Validators.required]],
+      LastName: ['', ],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
-      confirm_password: ['', [Validators.required]]
+      confPass: ['', [Validators.required]]
     });
   }
 
@@ -27,11 +28,12 @@ export class SignupPage implements OnInit {
 
   signup(){
     let formData = this.signupForm.value;
-    this.service.signup(formData).subscribe((result) => {
-      alert('Signup successful!');
-    }, (err) => {
-      alert('Signup failed');
+    this.service.signup(formData).subscribe({
+      next() {alert('Register successful!');}
+      , error(err)  {
+      alert('Register failed!');
       console.log(err);
+    }
     });
   }
 }

@@ -17,11 +17,11 @@
   <ion-list>
     <ion-item>
       <ion-label>First Name</ion-label>
-      <ion-input placeholder="" formControlName="firstName"></ion-input>
+      <ion-input placeholder="" formControlName="FirstName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Last Name</ion-label>
-      <ion-input placeholder="" formControlName="lastName"></ion-input>
+      <ion-input placeholder="" formControlName="LastName"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -42,7 +42,7 @@
     <!-- add validation. Last name not req'd but everything else is -->
   </ion-list>
   <br>
-  <ion-button expand="block" routerLink="../login" (click)="signup()">Let's Get Started!</ion-button>
+  <ion-button expand="block" [routerLink]="['/login']" (click)="signup()">Let's Get Started!</ion-button>
 </form>
   <br>
   <ion-text>Already have an account? <a routerLink="../login">Log in!</a> </ion-text>

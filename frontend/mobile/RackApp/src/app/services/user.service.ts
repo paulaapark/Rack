@@ -13,7 +13,7 @@ export class UserService {
   }
 
   signup(formData:object){
-    return this.http.post('http://localhost:3000/register', formData);
+    return this.http.post('http://localhost:3000/signup', formData);
   }
 
   get_current_user(){
