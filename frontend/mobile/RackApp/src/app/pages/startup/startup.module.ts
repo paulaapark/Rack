@@ -15,6 +15,6 @@ import { StartupPage } from './startup.page';
     IonicModule,
     StartupPageRoutingModule
   ],
-  declarations: [StartupPage]
+  declarations: [StartupPage],
 })
 export class StartupPageModule {}

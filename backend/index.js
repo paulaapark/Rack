@@ -10,12 +10,12 @@ const cors = require('cors');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const multer = require("multer");
+// const multer = require("multer");
 
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(express.static('uploads')); //This makes our uploads folder public
+// app.use(express.static('uploads')); //This makes our uploads folder public
 
 //Configure Multer
 // let storage = multer.diskStorage({
@@ -37,29 +37,36 @@ config.authenticate().then(function(){
 });
 
 
-app.get('/signup', function(req, res){ 
-})
+// app.get('/signup', function(req, res){ 
+// });
 
-app.post('/signup', function(req, res){
-    
-    let plainPassword = req.body.password;
+app.post('/signup', async (req, res) => {
+    const { FirstName, LastName, Email, Password} = req.body;
+    const hash = await bcrypt.hash(Password, 10);
+    const user_data = { FirstName, LastName, Email, Password: hash};
 
-    bcrypt.hash(plainPassword, saltRounds, function(err, hash) {
-        
-        let user_data = {
-            FirstName: req.body.FirstName,
-            LastName: req.body.LastName,
-            email: req.body.Email,
-            password: hash
-        };
-
-        User.create(user_data).then((result) => {
+    User.create(user_data).then((result) => {
             res.status(200).send(result);
         }).catch((err) => {
             res.status(500).send(err);
         });
 
-    });    
+    // bcrypt.hash(plainPassword, saltRounds, function(err, hash) {
+        
+    //     let user_data = {
+    //         FirstName: req.body.FirstName,
+    //         LastName: req.body.LastName,
+    //         Email: req.body.Email,
+    //         Password: hash
+    //     };
+
+    //     User.push(user_data).then((result) => {
+    //         res.status(200).send(result);
+    //     }).catch((err) => {
+    //         res.status(500).send(err);
+    //     });
+
+    // });    
 });
 
 app.post('/login', function(req, res){

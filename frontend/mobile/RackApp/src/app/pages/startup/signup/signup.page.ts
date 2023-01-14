@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { error } from 'console';
 import { UserService } from 'src/app/services/user.service';
+// import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -11,29 +11,55 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SignupPage implements OnInit {
 
-  signupForm: FormGroup;
+  signupForm;
 
   constructor(private service:UserService, private formBuilder: FormBuilder) { 
     this.signupForm = formBuilder.group({
       FirstName: ['', [Validators.required]],
-      LastName: ['', ],
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      confPass: ['', [Validators.required]]
+      LastName: ['', [Validators.required]],
+      Email: ['', [Validators.required]],
+      Password: ['', [Validators.required]],
+      // confPass: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
   }
 
-  signup(){
+  signup() {
     let formData = this.signupForm.value;
     this.service.signup(formData).subscribe({
-      next() {alert('Register successful!');}
-      , error(err)  {
-      alert('Register failed!');
-      console.log(err);
-    }
+        next: () => {
+          // console.log(result);
+          alert('Register successful!');
+          // this.router.navigate(['../login'], {relativeTo: this.route});
+        }, 
+        error: error => {
+        alert('Register failed!');
+        console.error(error);
+        }
     });
   }
+
+  get FirstNameFormControl(){
+    return this.signupForm.get('FirstName')!;
+  }
+
+  get LastNameFormControl(){
+    return this.signupForm.get('LastName')!;
+  }
+  get EmailFormControl(){
+    return this.signupForm.get('Email')!;
+  }
+
+  get PasswordFormControl(){
+    return this.signupForm.get('Password')!;
+  }
+
+  get confPassFormControl(){
+    return this.signupForm.get('confPass')!;
+  }
+
+
+
 }

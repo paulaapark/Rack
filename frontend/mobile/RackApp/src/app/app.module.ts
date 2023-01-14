@@ -9,8 +9,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SignupPageModule } from './pages/startup/signup/signup.module';
-import { LoginPageModule } from './pages/startup/login/login.module';
+// import { SignupPageModule } from './pages/startup/signup/signup.module';
+// import { LoginPageModule } from './pages/startup/login/login.module';
+import { StartupPageModule } from './pages/startup/startup.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,8 +20,10 @@ import { LoginPageModule } from './pages/startup/login/login.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SignupPageModule,
-    LoginPageModule],
+    // SignupPageModule,
+    // LoginPageModule,
+    StartupPageModule
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
