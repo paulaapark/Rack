@@ -8,14 +8,14 @@ import { NgModule } from '@angular/core';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page implements OnInit {
-  UserInfo:any;
+export class Tab1Page {
+  // UserInfo:any;
 
   constructor() {}
 
-  ngOnInit() {
-    this.UserInfo = JSON.parse(localStorage.getItem('currentUser')!);
-    console.log(this.UserInfo);
+  // ngOnInit() {
+  //   this.UserInfo = JSON.parse(localStorage.getItem('currentUser')!);
+  //   console.log(this.UserInfo);
    
-  }
+  // }
 }
