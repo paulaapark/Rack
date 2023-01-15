@@ -69,20 +69,18 @@ app.post('/signup', async (req, res) => {
     // });    
 });
 
-app.post('/login', function(req, res){
+app.post('/login', async (req, res) => {
 
-    let email = req.body.email;
-    let password = req.body.password;
-    let user_data = {
-        where: {email} // {email: email}
+    const {Email, Password} = req.body;
+    const user_data = {
+        where: {Email} // {email: email}
     }
     
     //Find a user that corresponds to the email
     User.findOne(user_data).then((result) => {
-
         if(result){
             console.log(result);
-            bcrypt.compare(password, result.password, function(err, output) {
+            bcrypt.compare(Password, result.Password, function(err, output) {
                 console.log(output);
                 if(output){
                     res.status(200).send(result);

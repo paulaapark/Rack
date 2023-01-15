@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,25 +10,37 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginPage implements OnInit {
 
-  loginForm:FormGroup;
+  loginForm;
 
-  constructor(private service:UserService, private formBuilder:FormBuilder) {
+  constructor(private service:UserService, private formBuilder:FormBuilder, private router:Router, private route:ActivatedRoute) {
     this.loginForm = formBuilder.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      Email: ['', [Validators.required]],
+      Password: ['', [Validators.required]]
     });
   }
 
   ngOnInit() {
   }
-  login(){
+  login() {
     let formData = this.loginForm.value;
-    this.service.login(formData).subscribe((result) => {
-      localStorage.setItem('currentUser', JSON.stringify(result)); //Storing the data of the currently logged in user on the browser
-      alert('Login successful!');
-    }, (err) => {
-      alert('Incorrect email/password');
-      console.log(err);
+    this.service.login(formData).subscribe({
+      next: (result) => {
+        localStorage.setItem('currentUser', JSON.stringify(result)); //Storing the data of the currently logged in user on the browser
+        alert('Login successful!');
+        this.router.navigate(['../../tabs'], {relativeTo: this.route});
+      }, error: error  => {
+        alert('Incorrect email/password');
+        console.error(error);
+      }  
     });
+  }
+
+
+  get EmailFormControl(){
+    return this.loginForm.get('Email')!;
+  }
+
+  get PasswordFormControl(){
+    return this.loginForm.get('Password')!;
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-// import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,13 +13,13 @@ export class SignupPage implements OnInit {
 
   signupForm;
 
-  constructor(private service:UserService, private formBuilder: FormBuilder) { 
+  constructor(private service:UserService, private formBuilder: FormBuilder, private router:Router, private route:ActivatedRoute) { 
     this.signupForm = formBuilder.group({
       FirstName: ['', [Validators.required]],
       LastName: ['', [Validators.required]],
       Email: ['', [Validators.required]],
       Password: ['', [Validators.required]],
-      // confPass: ['', [Validators.required]],
+      // confPass: ['', [Validators.required]], this doesnt work with db somehow
     });
   }
 
@@ -29,10 +29,10 @@ export class SignupPage implements OnInit {
   signup() {
     let formData = this.signupForm.value;
     this.service.signup(formData).subscribe({
-        next: () => {
-          // console.log(result);
+        next: (result) => {
+          console.log(result);
           alert('Register successful!');
-          // this.router.navigate(['../login'], {relativeTo: this.route});
+          this.router.navigate(['../login'], {relativeTo: this.route});
         }, 
         error: error => {
         alert('Register failed!');
