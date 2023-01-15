@@ -3,6 +3,7 @@ const app = express();
 const config = require('./config');
 
 const User = require('./models/user');
+const Rack = require('./models/rack');
 
 const cors = require('cors');
 
@@ -10,25 +11,32 @@ const cors = require('cors');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-// const multer = require("multer");
+const multer = require("multer");
 
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-// app.use(express.static('uploads')); //This makes our uploads folder public
+app.use(express.static('uploads')); //This makes our uploads folder public
 
-//Configure Multer
-// let storage = multer.diskStorage({
-//     destination: (req, file, cb) => {    
-//       cb(null, './uploads'); //Defining where uploads images should be stored
-//     },
-//     filename: (req, file, cb) => {
-//       cb(null, file.originalname); //Name of the uploaded file
-//     }
-//   });
-//   let upload = multer({
-//     storage: storage
-//   });
+
+//Associations
+User.hasMany(Rack, {
+    foreignKey: 'User_id'
+});
+Rack.belongsTo(User);
+
+// Configure Multer
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {    
+      cb(null, './uploads'); //Defining where uploads images should be stored
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.originalname); //Name of the uploaded file
+    }
+  });
+  let upload = multer({
+    storage: storage
+  });
 
 config.authenticate().then(function(){
     console.log('Database is connected.');
