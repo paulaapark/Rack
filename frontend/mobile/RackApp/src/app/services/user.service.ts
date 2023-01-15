@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
+  public currentUser: any = JSON.parse(localStorage.getItem('currentUser')!);
 
   constructor(private http:HttpClient) { }
 
@@ -23,4 +24,8 @@ export class UserService {
     return this.get_current_user() ? true: false;
   }
   
+
+  // public setUserInfo(){
+  //   this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
+  // }
 };

@@ -9,9 +9,8 @@ import { NgModule } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  // UserInfo:any;
 
-  constructor() {}
+  constructor(public userService:UserService) {}
 
   // ngOnInit() {
   //   this.UserInfo = JSON.parse(localStorage.getItem('currentUser')!);

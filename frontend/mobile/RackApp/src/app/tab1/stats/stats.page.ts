@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Chart } from 'chart.js';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-stats',
@@ -9,7 +10,7 @@ import { Chart } from 'chart.js';
 })
 export class StatsPage implements OnInit {
 
-  constructor() { }
+  constructor(public userService:UserService) { }
 
   ngOnInit() {
   }
