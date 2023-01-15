@@ -44,6 +44,10 @@ export class DefaultHeadComponent implements OnInit {
 
   ngOnInit() {}
 
-  
+  logout(){
+    localStorage.removeItem("currentUser");
+    alert("user logged out");
+    this.router.navigate(['startup']);
+  }
   
 }

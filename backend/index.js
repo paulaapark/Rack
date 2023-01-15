@@ -99,11 +99,17 @@ app.post('/login', async (req, res) => {
 });
 
 
+app.get('/user', function(req, res){
+    // User.findAll(user_data)
+});
 
+app.get('/rack', function(req, res){
+
+});
 
 
 app.get('/', function(req, res){ 
-})
+});
 
 app.listen(3000, function(){
     console.log('Server running on port 3000...')

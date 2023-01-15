@@ -63,7 +63,7 @@
             name="funnel-outline"></ion-icon>Filter</ion-button></ion-col>
     </ion-row>
   </ion-grid>
-  
+
 
   <!-- interpolate all of the users Rack items, data binding stuff -->
   <div class="ion-padding">
@@ -119,51 +119,53 @@
         </ion-text>
         <br>
         <div>
-          <ion-list>
-            <ion-item>
-              <ion-label>Title</ion-label>
-              <ion-input placeholder=""></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Description</ion-label>
-              <ion-input placeholder=""></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-label>
-              <ion-select interface="popover" placeholder="" [multiple]="true">
-                <ion-select-option value="spring">Spring</ion-select-option>
-                <ion-select-option value="summer">Summer</ion-select-option>
-                <ion-select-option value="fall">Fall</ion-select-option>
-                <ion-select-option value="winter">Winter</ion-select-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label><ion-icon name="shirt-outline"></ion-icon>Type</ion-label>
-              <ion-select interface="popover" placeholder="" [multiple]="true">
-                <ion-select-option value="top">Top</ion-select-option>
-                <ion-select-option value="bottom">Bottom</ion-select-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label><ion-icon name="color-palette-outline"></ion-icon>Color - Coming Soon!</ion-label>
-              <ion-input disabled placeholder=""></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label><ion-icon name="sparkles-outline"></ion-icon>Style - Coming Soon!</ion-label>
-              <ion-input disabled placeholder=""></ion-input>
-            </ion-item>
-          </ion-list>
-          <br>
-          <!-- show thumbnail of uploaded img here? or name of image file -->
-          <ion-chip (click)="presentActionSheet()">
-            <ion-icon name="image-outline" color="primary"></ion-icon>
-            <ion-label>Upload new clothing image(s) </ion-label>
-          </ion-chip>
-          <!-- link action sheet to the chip -->
-          <br>
-          <br>
-          <ion-button expand="block">Add to Rack!</ion-button>
-          <!-- add validation. Description not req'd-->
+          <form>
+            <ion-list>
+              <ion-item>
+                <ion-label>Title</ion-label>
+                <ion-input placeholder=""></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Description</ion-label>
+                <ion-input placeholder=""></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-label>
+                <ion-select interface="popover" placeholder="" [multiple]="true">
+                  <ion-select-option value="spring">Spring</ion-select-option>
+                  <ion-select-option value="summer">Summer</ion-select-option>
+                  <ion-select-option value="fall">Fall</ion-select-option>
+                  <ion-select-option value="winter">Winter</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label><ion-icon name="shirt-outline"></ion-icon>Type</ion-label>
+                <ion-select interface="popover" placeholder="" [multiple]="true">
+                  <ion-select-option value="top">Top</ion-select-option>
+                  <ion-select-option value="bottom">Bottom</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label><ion-icon name="color-palette-outline"></ion-icon>Color - Coming Soon!</ion-label>
+                <ion-input disabled placeholder=""></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label><ion-icon name="sparkles-outline"></ion-icon>Style - Coming Soon!</ion-label>
+                <ion-input disabled placeholder=""></ion-input>
+              </ion-item>
+            </ion-list>
+            <br>
+            <!-- show thumbnail of uploaded img here? or name of image file -->
+            <ion-chip (click)="presentActionSheet()">
+              <ion-icon name="image-outline" color="primary"></ion-icon>
+              <ion-label>Upload new clothing image(s) </ion-label>
+            </ion-chip>
+            <!-- link action sheet to the chip -->
+            <br>
+            <br>
+            <ion-button expand="block">Add to Rack!</ion-button>
+            <!-- add validation. Description not req'd-->
+          </form>
         </div>
         <br>
         <br>

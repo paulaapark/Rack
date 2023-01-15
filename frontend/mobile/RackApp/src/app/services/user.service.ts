@@ -22,4 +22,5 @@ export class UserService {
   isAuthenticated(){
     return this.get_current_user() ? true: false;
   }
+  
 };

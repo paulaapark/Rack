@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { UserService } from '../services/user.service';
+import { NgModule } from '@angular/core';
 
 
 @Component({
@@ -6,8 +8,14 @@ import { Component } from '@angular/core';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
+  UserInfo:any;
 
   constructor() {}
 
+  ngOnInit() {
+    this.UserInfo = JSON.parse(localStorage.getItem('currentUser')!);
+    console.log(this.UserInfo);
+   
+  }
 }

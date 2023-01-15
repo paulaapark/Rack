@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: Tab2Page,
+  },
+  {
+    path: 'new-rack',
+    loadChildren: () => import('./new-rack/new-rack.module').then( m => m.NewRackPageModule)
   }
 ];
 
