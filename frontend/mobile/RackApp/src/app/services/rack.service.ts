@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class RackService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
+  newRack(formData:object){
+    return this.http.post('http://localhost:3000/rack', formData)
+  }
 }

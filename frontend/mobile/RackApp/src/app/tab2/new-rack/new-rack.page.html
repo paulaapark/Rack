@@ -9,7 +9,7 @@
     </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" [fullscreen]="true">
   <br>
   <br>
   <ion-text>
@@ -17,19 +17,19 @@
   </ion-text>
   <br>
   <div>
-    <form>
+    <form [formGroup]="rackForm">
       <ion-list>
         <ion-item>
           <ion-label>Title</ion-label>
-          <ion-input placeholder=""></ion-input>
+          <ion-input placeholder="" formControlName="Title" required></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Description</ion-label>
-          <ion-input placeholder=""></ion-input>
+          <ion-input placeholder="" formControlName="Description"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-label>
-          <ion-select interface="popover" placeholder="" [multiple]="true">
+          <ion-select interface="popover" placeholder="" [multiple]="true" formControlName="Season" required>
             <ion-select-option value="spring">Spring</ion-select-option>
             <ion-select-option value="summer">Summer</ion-select-option>
             <ion-select-option value="fall">Fall</ion-select-option>
@@ -38,7 +38,7 @@
         </ion-item>
         <ion-item>
           <ion-label><ion-icon name="shirt-outline"></ion-icon>Type</ion-label>
-          <ion-select interface="popover" placeholder="" [multiple]="true">
+          <ion-select interface="popover" placeholder="" [multiple]="true" formControlName="Type" required>
             <ion-select-option value="top">Top</ion-select-option>
             <ion-select-option value="bottom">Bottom</ion-select-option>
           </ion-select>
@@ -54,14 +54,14 @@
       </ion-list>
       <br>
       <!-- show thumbnail of uploaded img here? or name of image file -->
-      <ion-chip (click)="presentActionSheet()">
+      <!-- <ion-chip (click)="presentActionSheet()">
         <ion-icon name="image-outline" color="primary"></ion-icon>
         <ion-label>Upload new clothing image(s) </ion-label>
-      </ion-chip>
+      </ion-chip> -->
       <!-- link action sheet to the chip -->
       <br>
       <br>
-      <ion-button expand="block">Add to Rack!</ion-button>
+      <ion-button expand="block" (click)="newRack()">Add to Rack!</ion-button>
       <!-- add validation. Description not req'd-->
     </form>
   </div>

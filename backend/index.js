@@ -107,6 +107,23 @@ app.post('/login', async (req, res) => {
 });
 
 
+app.post('/rack', upload.single('image'), function(req, res){
+    const {Title, Description, Season, Type} = req.body
+    const rack_data = {
+        Title,
+        Description,
+        Season,
+        Type,
+        Image: req.file? req.file.filename : null
+    };
+
+    Rack.create(rack_data).then((result) => {
+        res.status(200).send(result);
+    }).catch((err) => {
+        res.status(500).send(err);
+    });
+})
+
 app.get('/user', function(req, res){
     // User.findAll(user_data)
 });
