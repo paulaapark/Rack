@@ -6,6 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
 import { RackService } from 'src/app/services/rack.service';
 
+import { Camera, CameraResultType } from '@capacitor/camera';
+
 @Component({
   selector: 'app-new-rack',
   templateUrl: './new-rack.page.html',
@@ -14,6 +16,8 @@ import { RackService } from 'src/app/services/rack.service';
 export class NewRackPage {
 
   rackForm:FormGroup;
+
+  imageUrl:string|undefined = '';
 
   constructor(private actionSheetCtrl: ActionSheetController, 
     private formBuilder: FormBuilder, 
@@ -26,6 +30,7 @@ export class NewRackPage {
       Description: ['', ],
       Season: ['', [Validators.required]],
       Type: ['', [Validators.required]],
+      Image: ['', ],
       User_id: [this.userService.currentUser.id, [Validators.required]]
     })
    }
@@ -65,34 +70,25 @@ export class NewRackPage {
     return this.rackForm.get('Type')!;
   }
 
-
-  // async presentActionSheet() {
-  //   const actionSheet = await this.actionSheetCtrl.create({
-  //     header: 'Do you wish to import or capture a new image?',
-  //     subHeader: 'Attach up to 3 images',
-  //     buttons: [
-  //       {
-  //         text: 'Import',
-  //         data: {
-  //           action: 'import',
-  //         },
-  //       },
-  //       {
-  //         text: 'Capture',
-  //         data: {
-  //           action: 'capture',
-  //         },
-  //       },
-  //       {
-  //         text: 'Cancel',
-  //         role: 'cancel',
-  //         data: {
-  //           action: 'cancel',
-  //         },
-  //       },
-  //     ],
-  //   });
-
-  //   await actionSheet.present();
-  // }
+  takePicture(){
+      const snapPicture = async () => {
+        const image = await Camera.getPhoto({
+          quality: 90,
+          allowEditing: true,
+          resultType: CameraResultType.Uri
+        });
+      
+        // image.webPath will contain a path that can be set as an image src.
+        // You can access the original file using image.path, which can be
+        // passed to the Filesystem API to read the raw data of the image,
+        // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+        this.imageUrl = image.webPath;
+      
+        // Can be set to the src of an image now
+        // imageElement.src = imageUrl;
+        // alert(imageUrl);
+      };
+      snapPicture();
+    }
+  
 }

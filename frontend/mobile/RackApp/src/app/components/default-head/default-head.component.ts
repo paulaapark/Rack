@@ -46,7 +46,7 @@ export class DefaultHeadComponent implements OnInit {
 
   logout(){
     localStorage.removeItem("currentUser");
-    alert("user logged out");
+    alert("You have successfully logged out");
     this.router.navigate(['startup']);
   }
   

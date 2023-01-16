@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import { RackService } from '../services/rack.service';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { Component} from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  constructor(public rackService:RackService) {}
     
 
 }
