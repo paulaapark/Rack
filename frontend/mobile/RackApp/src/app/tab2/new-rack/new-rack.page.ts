@@ -15,13 +15,18 @@ export class NewRackPage {
 
   rackForm:FormGroup;
 
-  constructor(private actionSheetCtrl: ActionSheetController, private formBuilder: FormBuilder, private router:Router, private route:ActivatedRoute,
-    private rackService:RackService) {
+  constructor(private actionSheetCtrl: ActionSheetController, 
+    private formBuilder: FormBuilder, 
+    private router:Router, 
+    private route:ActivatedRoute,
+    private rackService:RackService,
+    public userService:UserService) {
     this.rackForm = formBuilder.group({
       Title: ['', [Validators.required]],
       Description: ['', ],
       Season: ['', [Validators.required]],
-      Type: ['', [Validators.required]]
+      Type: ['', [Validators.required]],
+      User_id: [this.userService.currentUser.id, [Validators.required]]
     })
    }
 
@@ -39,6 +44,10 @@ export class NewRackPage {
       }
     });
    }
+
+  get User_idFormControl(){
+    return this.rackForm.get('User_id')!;
+  }
 
   get TitleFormControl(){
     return this.rackForm.get('Title')!;

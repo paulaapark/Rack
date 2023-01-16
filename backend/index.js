@@ -5,6 +5,12 @@ const config = require('./config');
 const User = require('./models/user');
 const Rack = require('./models/rack');
 
+//Associations
+User.hasMany(Rack, {
+    foreignKey: 'User_id'
+});
+Rack.belongsTo(User);
+
 const cors = require('cors');
 
 
@@ -19,11 +25,7 @@ app.use(express.json());
 app.use(express.static('uploads')); //This makes our uploads folder public
 
 
-//Associations
-User.hasMany(Rack, {
-    foreignKey: 'User_id'
-});
-Rack.belongsTo(User);
+
 
 // Configure Multer
 let storage = multer.diskStorage({
@@ -108,13 +110,14 @@ app.post('/login', async (req, res) => {
 
 
 app.post('/rack', upload.single('image'), function(req, res){
-    const {Title, Description, Season, Type} = req.body
+    const {Title, Description, Season, Type, User_id} = req.body
     const rack_data = {
         Title,
         Description,
         Season,
         Type,
-        Image: req.file? req.file.filename : null
+        Image: req.file? req.file.filename : null,
+        User_id
     };
 
     Rack.create(rack_data).then((result) => {

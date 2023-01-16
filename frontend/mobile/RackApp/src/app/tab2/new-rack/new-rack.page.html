@@ -19,6 +19,10 @@
   <div>
     <form [formGroup]="rackForm">
       <ion-list>
+        <ion-item [hidden]="true">
+          <ion-label>User_id</ion-label>
+          <ion-input placeholder="" formControlName="User_id"></ion-input>
+        </ion-item>
         <ion-item>
           <ion-label>Title</ion-label>
           <ion-input placeholder="" formControlName="Title" required></ion-input>
@@ -29,7 +33,7 @@
         </ion-item>
         <ion-item>
           <ion-label><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-label>
-          <ion-select interface="popover" placeholder="" [multiple]="true" formControlName="Season" required>
+          <ion-select interface="popover" placeholder="" [multiple]="false" formControlName="Season" required>
             <ion-select-option value="spring">Spring</ion-select-option>
             <ion-select-option value="summer">Summer</ion-select-option>
             <ion-select-option value="fall">Fall</ion-select-option>
@@ -38,7 +42,7 @@
         </ion-item>
         <ion-item>
           <ion-label><ion-icon name="shirt-outline"></ion-icon>Type</ion-label>
-          <ion-select interface="popover" placeholder="" [multiple]="true" formControlName="Type" required>
+          <ion-select interface="popover" placeholder="" [multiple]="false" formControlName="Type" required>
             <ion-select-option value="top">Top</ion-select-option>
             <ion-select-option value="bottom">Bottom</ion-select-option>
           </ion-select>
