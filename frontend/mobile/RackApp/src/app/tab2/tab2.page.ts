@@ -11,6 +11,7 @@ import { RackService } from '../services/rack.service';
 export class Tab2Page {
 
   userRack:any;
+  ishidden:boolean = true;
 
   constructor(public rackService:RackService) {}
   ngOnInit(){
@@ -18,5 +19,14 @@ export class Tab2Page {
       this.userRack = Object.values(res);
     });
   }  
+
+  toggleHidden(){
+    if(this.ishidden=false) {
+      this.ishidden = true;
+    }
+    if(this.ishidden = true){
+      this.ishidden = false;
+    };
+  }
 
 }

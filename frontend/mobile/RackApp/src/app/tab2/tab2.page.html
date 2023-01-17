@@ -2,66 +2,70 @@
 
 <ion-content [fullscreen]="true" id="main-content">
   <ion-grid class="sticky-top">
-    <ion-searchbar animated="true" placeholder="Search Rack" show-clear-button="focus"></ion-searchbar>
+
     <!-- make this a debounce search type?  -->
     <ion-row>
+      <ion-col size="2"> </ion-col>
       <ion-col>
-        <ion-button id="click-season" fill="clear" size="small"><ion-icon
-            name="partly-sunny-outline"></ion-icon>Season</ion-button>
-        <ion-popover trigger="click-season" triggerAction="click">
-          <ng-template>
-            <ion-content class="ion-padding">
-              <ion-list>
-                <ion-item>
-                  <ion-checkbox slot="start" value="Spring"></ion-checkbox>
-                  <ion-label>Spring</ion-label>
-                </ion-item>
-                <ion-item>
-                  <ion-checkbox slot="start" value="Summer"></ion-checkbox>
-                  <ion-label>Summer</ion-label>
-                </ion-item>
-                <ion-item>
-                  <ion-checkbox slot="start" value="Fall"></ion-checkbox>
-                  <ion-label>Fall</ion-label>
-                </ion-item>
-                <ion-item>
-                  <ion-checkbox slot="start" value="Winter"></ion-checkbox>
-                  <ion-label>Winter</ion-label>
-                </ion-item>
-              </ion-list>
-            </ion-content>
-          </ng-template>
-        </ion-popover>
+        <ion-searchbar animated="true" placeholder="Search Rack" show-clear-button="focus"></ion-searchbar>
       </ion-col>
-      <ion-col><ion-button id="click-type" fill="clear" size="small"><ion-icon name="shirt-outline"></ion-icon>
-          Type</ion-button>
-        <ion-popover trigger="click-type" triggerAction="click">
-          <ng-template>
-            <ion-content class="ion-padding">
-              <ion-list>
-                <ion-item>
-                  <ion-checkbox slot="start" value="Top"></ion-checkbox>
-                  <ion-label>Tops</ion-label>
-                </ion-item>
-                <ion-item>
-                  <ion-checkbox slot="start" value="Bottom"></ion-checkbox>
-                  <ion-label>Bottoms</ion-label>
-                </ion-item>
-              </ion-list>
-            </ion-content>
-          </ng-template>
-        </ion-popover></ion-col>
-      <ion-col><ion-button disabled fill="clear" size="small"><ion-icon
-            name="color-palette-outline"></ion-icon>Color</ion-button></ion-col>
-      <ion-col><ion-button disabled fill="clear" size="small"><ion-icon
-            name="sparkles-outline"></ion-icon>Style</ion-button></ion-col>
+      <ion-col size="2"><ion-button fill="clear" (click)="toggleHidden()"><ion-icon name="funnel-outline"></ion-icon></ion-button>
+      </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col><ion-button disabled fill="clear" size="small"><ion-icon
-            name="bookmark-outline"></ion-icon>Save</ion-button></ion-col>
-      <ion-col><ion-button fill="clear" size="small"><ion-icon
-            name="funnel-outline"></ion-icon>Filter</ion-button></ion-col>
-    </ion-row>
+    <div class="filter-bar" [hidden]=ishidden>
+      <ion-row>
+        <ion-col>
+          <ion-button id="click-season" fill="clear" size="small"><ion-icon
+              name="partly-sunny-outline"></ion-icon>Season</ion-button>
+          <ion-popover trigger="click-season" triggerAction="click">
+            <ng-template>
+              <ion-content class="ion-padding">
+                <ion-list>
+                  <ion-item>
+                    <ion-checkbox slot="start" value="Spring"></ion-checkbox>
+                    <ion-label>Spring</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox slot="start" value="Summer"></ion-checkbox>
+                    <ion-label>Summer</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox slot="start" value="Fall"></ion-checkbox>
+                    <ion-label>Fall</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox slot="start" value="Winter"></ion-checkbox>
+                    <ion-label>Winter</ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+        </ion-col>
+        <ion-col><ion-button id="click-type" fill="clear" size="small"><ion-icon name="shirt-outline"></ion-icon>
+            Type</ion-button>
+          <ion-popover trigger="click-type" triggerAction="click">
+            <ng-template>
+              <ion-content class="ion-padding">
+                <ion-list>
+                  <ion-item>
+                    <ion-checkbox slot="start" value="Top"></ion-checkbox>
+                    <ion-label>Tops</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-checkbox slot="start" value="Bottom"></ion-checkbox>
+                    <ion-label>Bottoms</ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-content>
+            </ng-template>
+          </ion-popover></ion-col>
+        <ion-col><ion-button disabled fill="clear" size="small"><ion-icon
+              name="color-palette-outline"></ion-icon>Color</ion-button></ion-col>
+        <ion-col><ion-button disabled fill="clear" size="small"><ion-icon
+              name="sparkles-outline"></ion-icon>Style</ion-button></ion-col>
+      </ion-row>
+    </div>
   </ion-grid>
 
 
