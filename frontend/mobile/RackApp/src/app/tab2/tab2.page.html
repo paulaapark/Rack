@@ -9,10 +9,10 @@
       <ion-col>
         <ion-searchbar animated="true" placeholder="Search Rack" show-clear-button="focus"></ion-searchbar>
       </ion-col>
-      <ion-col size="2"><ion-button fill="clear" (click)="toggleHidden()"><ion-icon name="funnel-outline"></ion-icon></ion-button>
+      <ion-col size="2"><ion-button fill="clear" (click)="toggle()"><ion-icon name="funnel-outline"></ion-icon></ion-button>
       </ion-col>
     </ion-row>
-    <div class="filter-bar" [hidden]=ishidden>
+    <div class="filter-bar" *ngIf="show">
       <ion-row>
         <ion-col>
           <ion-button id="click-season" fill="clear" size="small"><ion-icon

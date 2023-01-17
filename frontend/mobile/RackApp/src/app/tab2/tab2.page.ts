@@ -11,22 +11,17 @@ import { RackService } from '../services/rack.service';
 export class Tab2Page {
 
   userRack:any;
-  ishidden!:boolean;
+  public show:boolean = false;
 
   constructor(public rackService:RackService) {}
   ngOnInit(){
     this.rackService.getUserRack().subscribe(res => {
       this.userRack = Object.values(res);
     });
-    this.ishidden = true;
   }  
 
-  toggleHidden(){
-     if(this.ishidden = true){
-      this.ishidden = false;
-    } else {
-      this.ishidden = true;
-    };
+  toggle(){
+    this.show = !this.show;
   }
 
 }
