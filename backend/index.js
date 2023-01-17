@@ -120,7 +120,7 @@ app.get('/rack', function(req, res){
     if(req.query.User_id !== undefined){
         rack_data.where.User_id = req.query.User_id;
     };
-    
+
     if(req.query.Season !== undefined){
         rack_data.where.Season = req.query.Season;
     };
@@ -137,30 +137,30 @@ app.get('/rack', function(req, res){
 
 });
 
-app.get('/rack/:User_id', function(req, res){
-    let User_id = req.params.User_id;
-    let rack_data = {where: {User_id}};
-    Rack.findAll(rack_data).then(function(results){
-        res.status(200).send(results);
-    }).catch(function(err){
-        res.status(500).send(err);
-    });
-});
+// app.get('/rack/:User_id', function(req, res){
+//     let User_id = req.params.User_id;
+//     let rack_data = {where: {User_id}};
+//     Rack.findAll(rack_data).then(function(results){
+//         res.status(200).send(results);
+//     }).catch(function(err){
+//         res.status(500).send(err);
+//     });
+// });
 
 // app.get('/rack', function(req, res){
 //     res.send('User_id: ' + req.query.User_id);
 // });
 
-app.get('/rack/:User_id/:Season', function(req, res){
-    let User_id = req.params.User_id;
-    let Season = req.params.Season;
-    let rack_data = {where: {User_id, Season}, include:User};
-    Rack.findAll(rack_data).then(function(results){
-        res.status(200).send(results);
-    }).catch(function(err){
-        res.status(500).send(err);
-    });
-});
+// app.get('/rack/:User_id/:Season', function(req, res){
+//     let User_id = req.params.User_id;
+//     let Season = req.params.Season;
+//     let rack_data = {where: {User_id, Season}, include:User};
+//     Rack.findAll(rack_data).then(function(results){
+//         res.status(200).send(results);
+//     }).catch(function(err){
+//         res.status(500).send(err);
+//     });
+// });
 
 
 

@@ -14,7 +14,7 @@ export class Tab2Page {
 
   constructor(public rackService:RackService) {}
   ngOnInit(){
-    this.rackService.getRack().subscribe(res => {
+    this.rackService.getUserRack().subscribe(res => {
       this.userRack = Object.values(res);
     });
   }  
