@@ -9,12 +9,22 @@ import { NgModule } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+public myDate = new Date();
+public hrs = this.myDate.getHours();
+public greeting:string;
 
-  constructor(public userService:UserService) {}
 
-  // ngOnInit() {
-  //   this.UserInfo = JSON.parse(localStorage.getItem('currentUser')!);
-  //   console.log(this.UserInfo);
-   
-  // }
+
+  constructor(public userService:UserService) {
+    if (this.hrs < 12){
+      this.greeting = 'Good Morning';
+    }else if ( this.hrs >= 12 && this.hrs <=17){
+      this.greeting = 'Good Afternoon';
+    }else{
+      this.greeting = 'Good Evening';
+    }
+  }
+
+  ngOnInit() {
+  }
 }
