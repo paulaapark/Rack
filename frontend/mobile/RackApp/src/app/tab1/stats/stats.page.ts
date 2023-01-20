@@ -14,7 +14,7 @@ import { Irack } from 'src/app/interfaces/irack';
 export class StatsPage implements OnInit {
 
   userRack!:Irack[];
-
+//is there a way to condense this?
   sumSpring!:number;
   sumSummer!:number;
   sumFall!:number;
@@ -36,30 +36,30 @@ export class StatsPage implements OnInit {
 
     this.rackService.getUserSpring().subscribe(res => {
       this.sumSpring = Object.values(res).length;
-      if (this.sumSpring < 2){
+      if (this.sumSpring == 1){
         this.itemS = "item"
-      }
+      };
     });
 
     this.rackService.getUserSummer().subscribe(res => {
       this.sumSummer = Object.values(res).length;
-      if (this.sumSummer < 2){
+      if (this.sumSummer == 1){
         this.itemSu = "item"
-      }
+      };
     });
 
     this.rackService.getUserFall().subscribe(res => {
       this.sumFall = Object.values(res).length;
-      if (this.sumFall < 2){
+      if (this.sumFall == 1){
         this.itemF = "item"
-      }
+      };
     });
 
     this.rackService.getUserWinter().subscribe(res => {
       this.sumWinter = Object.values(res).length;
-      if (this.sumWinter < 2){
+      if (this.sumWinter == 1){
         this.itemW = "item"
-      }
+      };
     });
 
   }
