@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 
 import { Chart } from 'chart.js';
 import { UserService } from 'src/app/services/user.service';
+import { RackService } from 'src/app/services/rack.service';
+import { Irack } from 'src/app/interfaces/irack';
+
 
 @Component({
   selector: 'app-stats',
@@ -10,10 +13,40 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class StatsPage implements OnInit {
 
-  constructor(public userService:UserService) { }
+  userRack!:Irack[];
+
+  sumSpring!:number;
+  sumSummer!:number;
+  sumFall!:number;
+  sumWinter!:number;
+
+  constructor(public userService:UserService, public rackService:RackService) { 
+  }
+
 
   ngOnInit() {
+    this.rackService.getUserRack().subscribe(res => {
+      this.userRack = Object.values(res);
+    });
+
+    this.rackService.getUserSpring().subscribe(res => {
+      this.sumSpring = Object.values(res).length
+    });
+
+    this.rackService.getUserSummer().subscribe(res => {
+      this.sumSummer = Object.values(res).length
+    });
+
+    this.rackService.getUserFall().subscribe(res => {
+      this.sumFall = Object.values(res).length
+    });
+
+    this.rackService.getUserWinter().subscribe(res => {
+      this.sumWinter = Object.values(res).length
+    });
+
   }
+  
 
 }
 
@@ -23,11 +56,6 @@ export class StatsPage implements OnInit {
 // import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 // import { Chart } from 'chart.js';
 
-// @Component({
-//   selector: 'app-home',
-//   templateUrl: 'home.page.html',
-//   styleUrls: ['home.page.scss'],
-// })
 // export class HomePage implements AfterViewInit {
 //   // Importing ViewChild. We need @ViewChild decorator to get a reference to the local variable 
 //   // that we have added to the canvas element in the HTML template.

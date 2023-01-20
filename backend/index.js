@@ -125,8 +125,8 @@ app.get('/rack', function(req, res){
         rack_data.where.Season = req.query.Season;
     };
 
-    if(req.query.Type !== undefined){
-        rack_data.where.Type = req.query.Type;
+    if(req.query.Item_type !== undefined){
+        rack_data.where.Item_type = req.query.Item_type;
     };    
 
     Rack.findAll(rack_data).then(function(results){

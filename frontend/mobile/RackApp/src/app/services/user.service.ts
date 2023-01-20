@@ -24,8 +24,4 @@ export class UserService {
     return this.get_current_user() ? true: false;
   }
   
-
-  // public setUserInfo(){
-  //   this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
-  // }
 };

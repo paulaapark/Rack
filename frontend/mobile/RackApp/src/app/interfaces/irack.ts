@@ -5,7 +5,7 @@ export interface Irack {
     Title:string;
     Description:string;
     Season:string;
-    Type:number;
+    Item_type:number;
     Image:string;
     User_id:Iuser;
 }

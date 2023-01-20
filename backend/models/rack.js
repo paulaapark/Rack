@@ -19,7 +19,7 @@ const Rack = config.define('Rack', {
         type: Sequelize.ENUM('Spring','Summer','Fall','Winter'),
         allowNull: false
     },
-    Type: {
+    Item_type: {
         type: Sequelize.ENUM('Top','Bottom'),
         allowNull: true
     },
