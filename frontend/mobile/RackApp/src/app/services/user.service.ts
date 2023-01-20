@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
-  public currentUser: any = JSON.parse(localStorage.getItem('currentUser')!);
-
+  
   constructor(private http:HttpClient) { }
+  public currentUser: any = JSON.parse(localStorage.getItem('currentUser')!);
 
   login(formData:object){
     return this.http.post('http://localhost:3000/login', formData);

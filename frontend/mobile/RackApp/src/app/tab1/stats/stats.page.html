@@ -7,15 +7,11 @@
   <br>
   <ion-text><h2 class="title-theme">{{ userService.currentUser.FirstName }}, your latest Rack Stats await!</h2></ion-text>
 
-  <!-- put the data visualization here. do i need to use tableau or can i do simple graphs here? -->
-
   <br>
   <ion-text>
     <p>
-      You have {{sumSpring}} spring clothing {{itemS}},<br>
-      {{sumSummer}} summer clothing {{itemSu}},<br>
-      {{sumFall}} fall clothing {{itemF}}, and<br>
-      {{sumWinter}} winter clothing {{itemW}}.<br>
+      You have {{sumSpring}} spring {{itemS}}, {{sumSummer}} summer {{itemSu}},<br>
+      {{sumFall}} fall {{itemF}}, and {{sumWinter}} winter {{itemW}}!<br>
     </p>
   </ion-text>
   <div class="ion-padding">
@@ -34,15 +30,6 @@
       </ion-card-header>
       <ion-card-content>
         <canvas #doughnutCanvas style="position: relative; height:20vh; width:40vw"></canvas>
-      </ion-card-content>
-    </ion-card>
- 
-    <ion-card>
-      <ion-card-header>
-        Line Chart
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #lineCanvas style="position: relative; height:20vh; width:40vw"></canvas>
       </ion-card-content>
     </ion-card>
   </div>

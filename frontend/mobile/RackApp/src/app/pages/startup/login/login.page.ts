@@ -26,7 +26,6 @@ export class LoginPage implements OnInit {
     this.service.login(formData).subscribe({
       next: (result) => {
         localStorage.setItem('currentUser', JSON.stringify(result)); //Storing the data of the currently logged in user on the browser
-        alert('Login successful!');
         this.router.navigate(['../../tabs'], {relativeTo: this.route});
       }, error: error  => {
         alert('Incorrect email/password');
