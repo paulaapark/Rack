@@ -20,6 +20,11 @@ export class StatsPage implements OnInit {
   sumFall!:number;
   sumWinter!:number;
 
+  itemS:string = "items";
+  itemSu:string = "items";
+  itemF:string = "items";
+  itemW:string = "items";
+
   constructor(public userService:UserService, public rackService:RackService) { 
   }
 
@@ -30,19 +35,31 @@ export class StatsPage implements OnInit {
     });
 
     this.rackService.getUserSpring().subscribe(res => {
-      this.sumSpring = Object.values(res).length
+      this.sumSpring = Object.values(res).length;
+      if (this.sumSpring < 2){
+        this.itemS = "item"
+      }
     });
 
     this.rackService.getUserSummer().subscribe(res => {
-      this.sumSummer = Object.values(res).length
+      this.sumSummer = Object.values(res).length;
+      if (this.sumSummer < 2){
+        this.itemSu = "item"
+      }
     });
 
     this.rackService.getUserFall().subscribe(res => {
-      this.sumFall = Object.values(res).length
+      this.sumFall = Object.values(res).length;
+      if (this.sumFall < 2){
+        this.itemF = "item"
+      }
     });
 
     this.rackService.getUserWinter().subscribe(res => {
-      this.sumWinter = Object.values(res).length
+      this.sumWinter = Object.values(res).length;
+      if (this.sumWinter < 2){
+        this.itemW = "item"
+      }
     });
 
   }

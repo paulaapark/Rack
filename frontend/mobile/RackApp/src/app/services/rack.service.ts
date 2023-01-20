@@ -14,8 +14,8 @@ export class RackService {
 
   baseURL:string = 'http://localhost:3000/rack';
   userURL:string = this.baseURL + '?User_id=' + this.currentUser.id;
-  typeQuery:string = '?Item_Type=';
-  seasonQuery:string = '?Season=';
+  typeQuery:string = '&Item_Type=';
+  seasonQuery:string = '&Season=';
   
 
   constructor(private http:HttpClient, public service:UserService) { }
