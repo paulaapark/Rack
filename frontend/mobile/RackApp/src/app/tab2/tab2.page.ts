@@ -13,9 +13,9 @@ export class Tab2Page {
   userRack:any;
   public show:boolean = false;
 
-  constructor(public rackService:RackService) {}
+  constructor(public service:RackService) {}
   ngOnInit(){
-    this.rackService.getUserRack().subscribe(res => {
+    this.service.getUserRack().subscribe(res => {
       this.userRack = Object.values(res);
     });
   }  
@@ -23,5 +23,6 @@ export class Tab2Page {
   toggle(){
     this.show = !this.show;
   }
+
 
 }

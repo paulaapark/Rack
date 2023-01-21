@@ -11,9 +11,9 @@ import { Irack } from 'src/app/interfaces/irack';
   templateUrl: './stats.page.html',
   styleUrls: ['./stats.page.scss'],
 })
-export class StatsPage implements OnInit {
+export class StatsPage implements AfterViewInit {
   // @ViewChild('barCanvas') private barCanvas: ElementRef;
-  // @ViewChild('doughnutCanvas') private doughnutCanvas: ElementRef;
+  // @ViewChild('doughnutCanvas') private doughnutCanvas!: ElementRef;
 
   userRack!: Irack[];
   //is there a way to condense this?
@@ -21,6 +21,8 @@ export class StatsPage implements OnInit {
   sumSummer!: number;
   sumFall!: number;
   sumWinter!: number;
+  sumTops!:number;
+  sumBottoms!:number;
 
   itemS: string = "items";
   itemSu: string = "items";
@@ -34,7 +36,7 @@ export class StatsPage implements OnInit {
   }
 
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.rackService.getUserRack().subscribe(res => {
       this.userRack = Object.values(res);
     });
@@ -67,12 +69,18 @@ export class StatsPage implements OnInit {
       };
     });
 
+    this.rackService.getUserTops().subscribe(res => {
+      this.sumTops = Object.values(res).length;
+    })
+
+    this.rackService.getUserBottoms().subscribe(res => {
+      this.sumBottoms = Object.values(res).length;
+    })
+
+    // this.doughnutChartMethod();
+    // this.barChartMethod();
   }
 
-  // ngAfterViewInit() {
-  //   this.barChartMethod();
-  //   this.doughnutChartMethod();
-  // }
 
   // barChartMethod() {
   //   // Now we need to supply a Chart element reference with an object that defines the type of chart we want to use, and the type of data we want to display.
@@ -121,7 +129,7 @@ export class StatsPage implements OnInit {
   //       labels: ['Tops', 'Bottoms'],
   //       datasets: [{
   //         label: 'Proportion of Clothing Types',
-  //         data: [50, 29],
+  //         data: [this.sumTops, this.sumBottoms],
   //         backgroundColor: [
   //           'rgba(255, 159, 64, 0.2)',
   //           'rgba(255, 99, 132, 0.2)',
