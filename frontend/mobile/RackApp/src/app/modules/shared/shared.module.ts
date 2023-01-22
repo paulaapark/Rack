@@ -5,16 +5,17 @@ import { DefaultHeadComponent } from 'src/app/components/default-head/default-he
 import { RouterModule } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { RackService } from 'src/app/services/rack.service';
+import { FilterPipe } from 'src/app/pipes/filter.pipe';
 
 
 
 @NgModule({
   declarations: [ DefaultHeadComponent ],
-  providers: [ UserService, RackService ],
+  providers: [ UserService, RackService, FilterPipe ],
   imports: [
     CommonModule,
     IonicModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [ DefaultHeadComponent ],
 })

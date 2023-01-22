@@ -12,10 +12,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { SignupPageModule } from './pages/startup/signup/signup.module';
 // import { LoginPageModule } from './pages/startup/login/login.module';
 import { StartupPageModule } from './pages/startup/startup.module';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FilterPipe],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
