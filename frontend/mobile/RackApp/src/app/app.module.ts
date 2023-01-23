@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { SignupPageModule } from './pages/startup/signup/signup.module';
 // import { LoginPageModule } from './pages/startup/login/login.module';
 import { StartupPageModule } from './pages/startup/startup.module';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { StartupPageModule } from './pages/startup/startup.module';
     HttpClientModule,
     // SignupPageModule,
     // LoginPageModule,
-    StartupPageModule
+    StartupPageModule,
+    Ng2SearchPipeModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

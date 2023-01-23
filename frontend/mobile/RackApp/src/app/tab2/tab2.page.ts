@@ -8,7 +8,7 @@ import { RackService } from '../services/rack.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  searchTerm:any='';
+  filterTerm:string = '';
   userRack:any;
   public show:boolean = false;
   // public rackFilter:any;
@@ -19,8 +19,6 @@ export class Tab2Page {
     this.service.getUserRack().subscribe(res => {
       this.userRack = Object.values(res);
     });
-
-    // this.rackFilter = [...this.userRack];
 
   }
 
