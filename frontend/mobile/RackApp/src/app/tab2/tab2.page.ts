@@ -8,9 +8,10 @@ import { RackService } from '../services/rack.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  searchTerm:string='';
+  searchTerm:any='';
   userRack:any;
   public show:boolean = false;
+  // public rackFilter:any;
 
   constructor(public service:RackService) {}
 
@@ -18,7 +19,15 @@ export class Tab2Page {
     this.service.getUserRack().subscribe(res => {
       this.userRack = Object.values(res);
     });
-  }  
+
+    // this.rackFilter = [...this.userRack];
+
+  }
+
+  // handleChange(event:any) {
+  //   const query = event.target.value.toLowerCase();
+  //   this.rackFilter = this.userRack.filter((d:any) => d.toLowerCase().indexOf(query) > -1);
+  // }
 
   toggle(){
     this.show = !this.show;

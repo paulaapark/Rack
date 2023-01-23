@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { SharedModule } from '../modules/shared/shared.module';
 
+
 @NgModule({
   imports: [
     IonicModule,

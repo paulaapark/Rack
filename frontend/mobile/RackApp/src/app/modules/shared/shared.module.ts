@@ -10,13 +10,13 @@ import { FilterPipe } from 'src/app/pipes/filter.pipe';
 
 
 @NgModule({
-  declarations: [ DefaultHeadComponent ],
-  providers: [ UserService, RackService, FilterPipe ],
+  declarations: [ DefaultHeadComponent, FilterPipe],
+  providers: [ UserService, RackService ],
   imports: [
     CommonModule,
     IonicModule,
-    RouterModule,
+    RouterModule
   ],
-  exports: [ DefaultHeadComponent ],
+  exports: [ DefaultHeadComponent, FilterPipe ],
 })
 export class SharedModule { }
