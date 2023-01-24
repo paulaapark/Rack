@@ -12,6 +12,9 @@ export class RackService {
   baseURL:string = 'http://localhost:3000/rack';
   typeQuery:string = '&Item_Type=';
   seasonQuery:string = '&Season=';
+
+  seasonsChecked:string='';
+  typesChecked:string='';
   
   constructor(private http:HttpClient, public service:UserService) { }
   public currentUser: any = this.service.currentUser;
@@ -29,6 +32,17 @@ export class RackService {
     return this.http.get(this.userURL)
   };
 
+  getFilteredSeason(){
+    return this.http.get(this.userURL + this.seasonQuery + this.seasonsChecked)
+  };
+  getFilteredType(){
+    return this.http.get(this.userURL + this.typeQuery + this.typesChecked)
+  };
+
+  getFilteredMulti(){
+    return this.http.get(this.userURL + this.seasonQuery + this.seasonsChecked + this.typeQuery + this.typesChecked)
+  };
+  
   getUserTops(){
     return this.http.get(this.userURL + this.typeQuery + 'Top')
   };
@@ -45,6 +59,6 @@ export class RackService {
     return this.http.get(this.userURL + this.seasonQuery + 'Fall')
   };
   getUserWinter(){
-    return this.http.get(this.userURL + this.seasonQuery + 'Summer')
+    return this.http.get(this.userURL + this.seasonQuery + 'Winter')
   };
 }
