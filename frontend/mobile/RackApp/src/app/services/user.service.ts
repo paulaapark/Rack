@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
-  
+  // prodBaseUrl="https://rack-p.herokuapp.com/"
+  // devBaseUrl="http://localhost:3000/"
   constructor(private http:HttpClient) { }
   public currentUser: any = JSON.parse(localStorage.getItem('currentUser')!);
 

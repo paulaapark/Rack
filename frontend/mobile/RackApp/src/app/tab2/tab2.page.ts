@@ -1,7 +1,12 @@
 import { Component, OnInit} from '@angular/core';
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { RackService } from '../services/rack.service';
 // import { ActivatedRoute } from '@angular/router';
+
+import * as $ from "jquery";
+import { IonCheckbox } from '@ionic/angular';
+import { CheckboxControlValueAccessor } from '@angular/forms';
+import { event } from 'jquery';
 
 @Component({
   selector: 'app-tab2',
@@ -12,9 +17,14 @@ export class Tab2Page {
   filterTerm:string = '';
   userRack:any;
   public show:boolean = false;
-  seasonsChecked:[]=[];
-  typesChecked:[]=[];
   mainRackFunction:any;
+  selection:undefined;
+  selectedSeasons:any = [];
+  selectedTypes:any=[];
+  // selectionS:undefined;
+  // selectionT:undefined;
+
+  filteredArray:any=[this.selectedSeasons, this.selectedTypes];
   
 //   $('input[name=seasonsChecked]:checked').each(function(){
 //     this.seasonsChecked.push($(this).val()); //each loops through all the checked items, put a callback function. $(this) is a checked item. .val is getting the value and push pushes the item into the array extras.
@@ -28,29 +38,47 @@ export class Tab2Page {
       this.userRack = Object.values(res);
     });
 
+    // if(this.filterTerm == null && (this.onSeasonCheckboxChange(event).val == true || this.onTypeCheckboxChange(event).val ==true)){
 
-    // for(let i = 0; i < this.seasonsChecked.length; i++){
-    //   let seasonChecked = this.seasonsChecked[i];
-
-    //   if(seasonChecked === 'Spring'){
-    //       total_cost += 1.5;
-    //   }
-    //   else if (seasonChecked === 'Summer'){
-    //       total_cost += 2;
-    //   }
-    //   else if (seasonChecked === 'Fall'){
-    //       total_cost += 3;
-    //   }
-    //   else if (seasonChecked === 'Winter'){
-    //     total_cost += 3;
     // }
-  }
-  
 
+    console.log(this.filteredArray);
+
+  }
 
   toggle(){
     this.show = !this.show;
   }
 
+  handleChange(e:any) {
+    this.selection = (e.detail.value);
+    // if (this.selection == "spring" || "summer" || "fall" || "winter"){
+      
+    // }
+  }
 
+  
+  
+
+  // onSeasonCheckboxChange(event:any){
+  //   let val = event.target.value;
+  //   let seasonsChecked:any=[];
+  //   if(this.filterTerm == null){
+  //     $('ion-checkbox[name=season]:checked').each(function(){
+  //       seasonsChecked.push($(this).val());
+  //     })
+  //   }
+
+  //   console.log(seasonsChecked);
+
+  // }
+
+  // onTypeCheckboxChange(event:any){
+  //   let typesChecked:any=[];
+  //   $('Ion-Checkbox[name=type]:checked').each(function(){
+  //     typesChecked.push($(this).val());
+  //   })
+
+  //   console.log(typesChecked);
+  // }
 }

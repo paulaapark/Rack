@@ -9,6 +9,12 @@
   <h4>What shall we create this {{ timeOfDay }}?</h4>
   <br>
   <form [formGroup]="builderForm">
+
+    <!-- <div formArrayName="items">
+      <div *ngFor="let _ of items.controls; index as i">
+        <input [formControlName]="i">
+      </div>
+    </div> -->
     <ion-accordion-group value="first">
       <ion-accordion value="first">
         <ion-item slot="header" color="dark">
@@ -81,10 +87,10 @@
         </div>
       </ion-accordion>
       <br>
-      <ion-button fill="clear" (click)="pushItem()">Add another item?</ion-button>
+      <ion-button fill="clear" (click)="addItem()">Add another item?</ion-button>
     </ion-accordion-group>
 
-    <ion-button expand="block" routerLink="results" (click)="generate()">Generate!</ion-button>
+    <ion-button expand="block" routerLink="results" (click)="onSubmit()">Generate!</ion-button>
   </form>
 
   <div class="loading" hidden="true">
