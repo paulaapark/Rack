@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { filter, Observable } from 'rxjs';
 import { RackService } from '../services/rack.service';
 // import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 import * as $ from "jquery";
 import { IonCheckbox } from '@ionic/angular';
@@ -18,67 +19,110 @@ export class Tab2Page {
   userRack:any;
   public show:boolean = false;
   mainRackFunction:any;
-  selection:undefined;
-  selectedSeasons:any = [];
-  selectedTypes:any=[];
-  // selectionS:undefined;
-  // selectionT:undefined;
+  
 
-  filteredArray:any=[this.selectedSeasons, this.selectedTypes];
+  selectedSeasons:any;
+  selectedTypes:any;
+
+  public strSelSeasons:undefined;
+  public strSelTypes:undefined;
   
-//   $('input[name=seasonsChecked]:checked').each(function(){
-//     this.seasonsChecked.push($(this).val()); //each loops through all the checked items, put a callback function. $(this) is a checked item. .val is getting the value and push pushes the item into the array extras.
-// });
-  constructor(public service:RackService) {}
+  constructor(public service:RackService, private http:HttpClient) {}
+  handleSChange(e:any) {
+    let val = (e.detail.value);
+    this.selectedSeasons = [];
+    this.selectedSeasons.push(val);
+    // let filteredArray = [selectedSeasons, selectedTypes];
+    // console.log(filteredArray);
+    // console.log(this.selectedSeasons);
+
+    if(this.selectedSeasons !== null){
+      this.strSelSeasons = this.selectedSeasons.join("&Season=");
+    }
+
+    console.log(this.strSelSeasons);
+  }
+  handleTChange(e:any) {
+    let val = (e.detail.value);
+    this.selectedTypes = [];
+    this.selectedTypes.push(val);
+    // console.log(this.selectedTypes);
+
+    if(this.selectedTypes !== null){
+      this.strSelTypes = this.selectedTypes.join("&Item_type=");
+    }
+    console.log(this.strSelTypes);
+  }
   
-  ngOnInit(){
+  async ngOnInit(){
     this.mainRackFunction = this.service.getUserRack();
     
     this.mainRackFunction.subscribe((res:any) => {
       this.userRack = Object.values(res);
     });
+    // await this.selectedSeasons.length > 0 || this.selectedTypes.length > 0;
 
-    // if(this.filterTerm == null && (this.onSeasonCheckboxChange(event).val == true || this.onTypeCheckboxChange(event).val ==true)){
-
+    // if(this.selectedSeasons.length > 0 && this.selectedTypes.length > 0){
+    //   this.getFilteredMulti().subscribe((res:any) => {
+    //     this.userRack = Object.values(res);
+    //   });
     // }
-
-    console.log(this.filteredArray);
-
+    // if(this.selectedSeasons.length > 0 && this.selectedTypes.length < 1){
+    //   this.getFilteredSeasons().subscribe((res:any) => {
+    //     this.userRack = Object.values(res);
+    //   })
+    // }
+    // if(this.selectedSeasons.length < 1 && this.selectedTypes.length < 1){
+    //   this.getFilteredTypes().subscribe((res:any) => {
+    //     this.userRack = Object.values(res);
+    //   })
+    // } else { 
+    //   this.mainRackFunction = this.service.getUserRack();
+    //   this.mainRackFunction.subscribe((res:any) => {
+    //     this.userRack = Object.values(res);
+    //   });
+    // }
+  }
+    
+  ngOnChanges(){
+    if(this.selectedSeasons.length > 0 && this.selectedTypes.length > 0){
+      this.getFilteredMulti().subscribe((res:any) => {
+        this.userRack = Object.values(res);
+      });
+    }
+    if(this.selectedSeasons.length > 0 && this.selectedTypes.length < 1){
+      this.getFilteredSeasons().subscribe((res:any) => {
+        this.userRack = Object.values(res);
+      })
+    }
+    if(this.selectedSeasons.length < 1 && this.selectedTypes.length < 1){
+      this.getFilteredTypes().subscribe((res:any) => {
+        this.userRack = Object.values(res);
+      })
+    } else { 
+      this.mainRackFunction = this.service.getUserRack();
+      this.mainRackFunction.subscribe((res:any) => {
+        this.userRack = Object.values(res);
+      });
+    }
   }
 
   toggle(){
     this.show = !this.show;
   }
 
-  handleChange(e:any) {
-    this.selection = (e.detail.value);
-    // if (this.selection == "spring" || "summer" || "fall" || "winter"){
-      
-    // }
-  }
+  getFilteredMulti(){
+    return this.http.get(this.service.userURL + this.service.seasonQuery + this.strSelSeasons + this.service.typeQuery + this.strSelTypes);
+  };
 
+  getFilteredSeasons(){
+    return this.http.get(this.service.userURL + this.service.seasonQuery + this.strSelSeasons);
+  };
+
+  getFilteredTypes(){
+    return this.http.get(this.service.userURL + this.service.typeQuery + this.strSelTypes);
+  };
   
   
-
-  // onSeasonCheckboxChange(event:any){
-  //   let val = event.target.value;
-  //   let seasonsChecked:any=[];
-  //   if(this.filterTerm == null){
-  //     $('ion-checkbox[name=season]:checked').each(function(){
-  //       seasonsChecked.push($(this).val());
-  //     })
-  //   }
-
-  //   console.log(seasonsChecked);
-
-  // }
-
-  // onTypeCheckboxChange(event:any){
-  //   let typesChecked:any=[];
-  //   $('Ion-Checkbox[name=type]:checked').each(function(){
-  //     typesChecked.push($(this).val());
-  //   })
-
-  //   console.log(typesChecked);
-  // }
 }
+
