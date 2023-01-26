@@ -12,8 +12,6 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 
 
-
-
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +19,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
     IonicModule,
     BuilderInputPageRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [BuilderInputPage]
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RackService } from 'src/app/services/rack.service';
 import { UserService } from 'src/app/services/user.service';
-import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-builder-input',
@@ -16,8 +16,9 @@ export class BuilderInputPage implements OnInit {
   filteredRack:any;
   generatedItem:any;
   generatedArray:any;
-  builderForm:FormGroup;
+  builderForm;
   filterQuery:any;
+  
 
   constructor(public userService:UserService, public rackService:RackService, private formBuilder:FormBuilder) { 
     if (this.hrs < 12){
@@ -28,36 +29,42 @@ export class BuilderInputPage implements OnInit {
       this.timeOfDay = 'evening';
     };
 
-
     this.builderForm = formBuilder.group({
-      Season: ['', [Validators.required]],
-      Item_type: ['', [Validators.required]]
-      // items: new FormArray([])
+      items: this.formBuilder.array([
+        this.itemInit(),
+      ])
     });
+    
+    
   }
 
-    // get items(){
-    //   // return this.builderForm.get('items') as FormArray
-    // }
 
 
   ngOnInit() {
-    this.rackService.getUserRack().subscribe(res => {
-      this.userRack = Object.values(res);
-    });
+    // this.rackService.getUserRack().subscribe(res => {
+    //   this.userRack = Object.values(res);
+    // });
 
+    
     // this.filteredRack = this.userRack.filter(this.filterQuery)
   }
 
 
-
-  addItem(){
-    // const control = new FormControl('', Validators.required);
-    // this.items.push(control);
+  itemInit(){
+    return this.formBuilder.group({
+      Season: ['', [Validators.required]],
+      Item_type: ['', [Validators.required]]
+    })
   }
 
-  deleteItem(){
+  addItem(){
+    const control = <FormArray>this.builderForm.controls['items'];
+    control.push(this.itemInit());
+  }
 
+  deleteItem(i: number){
+    const control = <FormArray>this.builderForm.controls['items'];
+    control.removeAt(i);
   }
 
   onSubmit(){

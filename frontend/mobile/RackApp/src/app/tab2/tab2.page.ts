@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { filter, Observable } from 'rxjs';
 import { RackService } from '../services/rack.service';
 // import { ActivatedRoute } from '@angular/router';
@@ -15,114 +15,135 @@ import { event } from 'jquery';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  filterTerm:string = '';
-  userRack:any;
-  public show:boolean = false;
-  mainRackFunction:any;
-  
+  filterTerm: string = '';
+  userRack: any;
+  public show: boolean = false;
+  mainRackFunction: any;
 
-  selectedSeasons:any;
-  selectedTypes:any;
+  selectedSeasons: any;
+  selectedTypes: any;
 
-  public strSelSeasons:undefined;
-  public strSelTypes:undefined;
-  
-  constructor(public service:RackService, private http:HttpClient) {}
-  handleSChange(e:any) {
+  strSelSeasons: any;
+  strSelTypes: any;
+
+  constructor(public service: RackService, private http: HttpClient) {
+
+  }
+
+  handleSChange(e: any) {
     let val = (e.detail.value);
-    this.selectedSeasons = [];
-    this.selectedSeasons.push(val);
-    // let filteredArray = [selectedSeasons, selectedTypes];
-    // console.log(filteredArray);
-    // console.log(this.selectedSeasons);
-
-    if(this.selectedSeasons !== null){
+    this.selectedSeasons = val;
+    if (this.selectedSeasons.length < 1) {
+      this.strSelSeasons = this.selectedSeasons.toString();
+    }
+    else {
       this.strSelSeasons = this.selectedSeasons.join("&Season=");
-    }
-
-    console.log(this.strSelSeasons);
+    };
+    // console.log(this.selectedSeasons);
+    // console.log(this.strSelSeasons);
   }
-  handleTChange(e:any) {
+
+  handleTChange(e: any) {
     let val = (e.detail.value);
-    this.selectedTypes = [];
-    this.selectedTypes.push(val);
+    this.selectedTypes = val;
     // console.log(this.selectedTypes);
-
-    if(this.selectedTypes !== null){
-      this.strSelTypes = this.selectedTypes.join("&Item_type=");
+    if (this.selectedTypes.length < 1) {
+      this.strSelTypes = this.selectedTypes.toString();
     }
-    console.log(this.strSelTypes);
+    else {
+      this.strSelTypes = this.selectedTypes.join("&Item_type=");
+    };
+    // console.log(this.strSelTypes);
   }
-  
-  async ngOnInit(){
+
+
+  async ngOnInit() {
+    this.selectedSeasons = [];
+    this.selectedTypes = [];
+
     this.mainRackFunction = this.service.getUserRack();
-    
-    this.mainRackFunction.subscribe((res:any) => {
+    this.mainRackFunction.subscribe((res: any) => {
       this.userRack = Object.values(res);
     });
-    // await this.selectedSeasons.length > 0 || this.selectedTypes.length > 0;
 
-    // if(this.selectedSeasons.length > 0 && this.selectedTypes.length > 0){
-    //   this.getFilteredMulti().subscribe((res:any) => {
-    //     this.userRack = Object.values(res);
-    //   });
-    // }
-    // if(this.selectedSeasons.length > 0 && this.selectedTypes.length < 1){
-    //   this.getFilteredSeasons().subscribe((res:any) => {
-    //     this.userRack = Object.values(res);
-    //   })
-    // }
-    // if(this.selectedSeasons.length < 1 && this.selectedTypes.length < 1){
-    //   this.getFilteredTypes().subscribe((res:any) => {
-    //     this.userRack = Object.values(res);
-    //   })
-    // } else { 
-    //   this.mainRackFunction = this.service.getUserRack();
-    //   this.mainRackFunction.subscribe((res:any) => {
-    //     this.userRack = Object.values(res);
-    //   });
-    // }
-  }
-    
-  ngOnChanges(){
-    if(this.selectedSeasons.length > 0 && this.selectedTypes.length > 0){
-      this.getFilteredMulti().subscribe((res:any) => {
-        this.userRack = Object.values(res);
-      });
-    }
-    if(this.selectedSeasons.length > 0 && this.selectedTypes.length < 1){
-      this.getFilteredSeasons().subscribe((res:any) => {
-        this.userRack = Object.values(res);
+    // this.strSelSeasons || this.strSelTypes;
+
+    await Promise.all([this.handleSChange, this.handleTChange])
+      .then(res => {
+        if (this.selectedSeasons.length > 0 && this.selectedTypes.length > 0) {
+          this.getFilteredMulti().subscribe((res: any) => {
+            this.userRack = Object.values(res);
+          });
+        }
+        if (this.selectedSeasons.length > 0 && this.selectedTypes.length < 1) {
+          this.getFilteredSeasons().subscribe((res: any) => {
+            this.userRack = Object.values(res);
+          })
+        }
+        if (this.selectedSeasons.length < 1 && this.selectedTypes.length > 0) {
+          this.getFilteredTypes().subscribe((res: any) => {
+            this.userRack = Object.values(res);
+          })
+        }
+        else {
+          this.mainRackFunction = this.service.getUserRack();
+          this.mainRackFunction.subscribe((res: any) => {
+            this.userRack = Object.values(res);
+          })
+        }
+        console.log(res);
       })
-    }
-    if(this.selectedSeasons.length < 1 && this.selectedTypes.length < 1){
-      this.getFilteredTypes().subscribe((res:any) => {
-        this.userRack = Object.values(res);
-      })
-    } else { 
-      this.mainRackFunction = this.service.getUserRack();
-      this.mainRackFunction.subscribe((res:any) => {
-        this.userRack = Object.values(res);
+      .catch(err => {
+        console.error(err);
       });
-    }
+
+
+
   }
 
-  toggle(){
+  // ngAfterViewInit() {
+  //   console.log(this.selectedSeasons);
+  //   console.log(this.selectedTypes);
+
+  //   if (this.selectedSeasons.length > 0 && this.selectedTypes.length > 0) {
+  //     this.getFilteredMulti().subscribe((res: any) => {
+  //       this.userRack = Object.values(res);
+  //     });
+  //   }
+  //   if (this.selectedSeasons.length > 0 && this.selectedTypes.length < 1) {
+  //     this.getFilteredSeasons().subscribe((res: any) => {
+  //       this.userRack = Object.values(res);
+  //     })
+  //   }
+  //   if (this.selectedSeasons.length < 1 && this.selectedTypes.length > 0) {
+  //     this.getFilteredTypes().subscribe((res: any) => {
+  //       this.userRack = Object.values(res);
+  //     })
+  //   }
+  //   else {
+  //     this.mainRackFunction = this.service.getUserRack();
+  //     this.mainRackFunction.subscribe((res: any) => {
+  //       this.userRack = Object.values(res);
+  //     });
+  //   }
+  // }
+
+  toggle() {
     this.show = !this.show;
   }
 
-  getFilteredMulti(){
+  getFilteredMulti() {
     return this.http.get(this.service.userURL + this.service.seasonQuery + this.strSelSeasons + this.service.typeQuery + this.strSelTypes);
   };
 
-  getFilteredSeasons(){
+  getFilteredSeasons() {
     return this.http.get(this.service.userURL + this.service.seasonQuery + this.strSelSeasons);
   };
 
-  getFilteredTypes(){
+  getFilteredTypes() {
     return this.http.get(this.service.userURL + this.service.typeQuery + this.strSelTypes);
   };
-  
-  
+
+
 }
 

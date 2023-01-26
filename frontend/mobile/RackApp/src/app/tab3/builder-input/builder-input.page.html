@@ -7,15 +7,56 @@
   <h5>{{ userService.currentUser.FirstName }} X RACK Collab</h5>
   <br>
   <h4>What shall we create this {{ timeOfDay }}?</h4>
-  <br>
-  <form [formGroup]="builderForm">
-
-    <!-- <div formArrayName="items">
-      <div *ngFor="let _ of items.controls; index as i">
-        <input [formControlName]="i">
+  
+  <form [formGroup]="builderForm" novalidate>
+    <div formArrayName="items" class="ion-padding">
+      <div *ngFor="let item of builderForm.controls.items.controls; let i=index">
+        <!-- <div>
+          <ion-label> Item #{{i + 1}}</ion-label>
+          <ion-button slot="icon-only" fill="clear" *ngIf="builderForm.controls.items.controls.length > 1" (click)="deleteItem(i)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+        </div> -->
+        <h5> Item #{{i + 1}}
+          <ion-button slot="icon-only" fill="clear" *ngIf="builderForm.controls.items.controls.length > 1" (click)="deleteItem(i)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+        </h5>
+        <div [formGroupName]="i">
+          <ion-list>
+            <ion-item>
+              <ion-label><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-label>
+              <ion-select interface="popover" placeholder="" [multiple]="true" formControlName="Season">
+                <ion-select-option value="spring">Spring</ion-select-option>
+                <ion-select-option value="summer">Summer</ion-select-option>
+                <ion-select-option value="fall">Fall</ion-select-option>
+                <ion-select-option value="winter">Winter</ion-select-option>
+                <ion-select-option value="*">Let Rack Decide!</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label><ion-icon name="shirt-outline"></ion-icon>Type</ion-label>
+              <ion-select interface="popover" placeholder="" [multiple]="true" formControlName="Item_type">
+                <ion-select-option value="top">Top</ion-select-option>
+                <ion-select-option value="bottom">Bottom</ion-select-option>
+                <ion-select-option value="*">Let Rack Decide!</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label><ion-icon name="color-palette-outline"></ion-icon>Color - Coming Soon!</ion-label>
+              <ion-input disabled placeholder=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label><ion-icon name="sparkles-outline"></ion-icon>Style - Coming Soon!</ion-label>
+              <ion-input disabled placeholder=""></ion-input>
+            </ion-item>
+          </ion-list>
+        </div>
       </div>
-    </div> -->
-    <ion-accordion-group value="first">
+    </div>
+    <br>
+    <ion-button fill="clear" (click)="addItem()">Add another item?</ion-button>
+    <br>
+    <ion-button expand="block" (click)="onSubmit()">Generate!</ion-button>
+  </form>
+
+<!-- <ion-accordion-group value="first">
       <ion-accordion value="first">
         <ion-item slot="header" color="dark">
           <ion-label>First Item</ion-label>
@@ -86,12 +127,8 @@
           </ion-list>
         </div>
       </ion-accordion>
-      <br>
-      <ion-button fill="clear" (click)="addItem()">Add another item?</ion-button>
-    </ion-accordion-group>
+    </ion-accordion-group> -->
 
-    <ion-button expand="block" routerLink="results" (click)="onSubmit()">Generate!</ion-button>
-  </form>
 
   <div class="loading" hidden="true">
     <br>
