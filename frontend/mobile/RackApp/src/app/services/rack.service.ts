@@ -33,6 +33,8 @@ export class RackService {
     return this.http.get(this.userURL)
   };
 
+  
+
   getFilteredSeasons(){
     return this.http.get(this.userURL + this.seasonQuery + this.selectedSeasons)
   };
@@ -62,4 +64,6 @@ export class RackService {
   getUserWinter(){
     return this.http.get(this.userURL + this.seasonQuery + 'Winter')
   };
+
+
 }

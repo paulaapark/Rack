@@ -17,35 +17,42 @@
             <ion-col>
             <ion-item lines="none">
               <!-- <ion-label><ion-icon name="partly-sunny-outline"></ion-icon></ion-label> -->
-              <ion-select interface="popover" placeholder="Season" [multiple]="true" name="seasons" (ionChange)="handleSChange($event)">
-                <ion-select-option name="seasons" value="Spring">Spring</ion-select-option>
-                <ion-select-option name="seasons" value="Summer">Summer</ion-select-option>
-                <ion-select-option name="seasons" value="Fall">Fall</ion-select-option>
-                <ion-select-option name="seasons" value="Winter">Winter</ion-select-option>
+              <ion-select interface="popover" placeholder="Season" [multiple]="true" name="seasons" (ionChange)="handleChange($event)">
+                <ion-select-option name="seasons" value="&Season=Spring">Spring</ion-select-option>
+                <ion-select-option name="seasons" value="&Season=Summer">Summer</ion-select-option>
+                <ion-select-option name="seasons" value="&Season=Fall">Fall</ion-select-option>
+                <ion-select-option name="seasons" value="&Season=Winter">Winter</ion-select-option>
               </ion-select>
             </ion-item>
           </ion-col>
           <ion-col>
             <ion-item lines="none">
               <!-- <ion-label><ion-icon name="shirt-outline"></ion-icon></ion-label> -->
-              <ion-select interface="popover" placeholder="Type" [multiple]="true" name="types" (ionChange)="handleTChange($event)">
-                <ion-select-option name="types" value="Top">Top</ion-select-option>
-                <ion-select-option name="types" value="Bottom">Bottom</ion-select-option>
+              <ion-select interface="popover" placeholder="Type" [multiple]="true" name="types" (ionChange)="handleChange($event)">
+                <ion-select-option name="types" value="&Item_type=Top">Top</ion-select-option>
+                <ion-select-option name="types" value="&Item_type=Bottom">Bottom</ion-select-option>
               </ion-select>
             </ion-item>
           </ion-col>
-          <ion-col>
+          <!-- <ion-col>
             <ion-item lines="none">
-              <!-- <ion-label><ion-icon name="color-palette-outline"></ion-icon></ion-label> -->
+              <ion-label><ion-icon name="color-palette-outline"></ion-icon></ion-label>
               <ion-input disabled placeholder="Color"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
             <ion-item lines="none">
-              <!-- <ion-label><ion-icon name="sparkles-outline"></ion-icon></ion-label> -->
+              <ion-label><ion-icon name="sparkles-outline"></ion-icon></ion-label> 
               <ion-input disabled placeholder="Style"></ion-input>
             </ion-item>
-          </ion-col>
+          </ion-col> -->
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-input disabled placeholder="Color & Style Filters Coming Soon!"></ion-input>
+          </ion-item>
+        </ion-col>
       </ion-row>
       <!-- <ion-row>
         
