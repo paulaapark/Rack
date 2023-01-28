@@ -17,7 +17,7 @@
             <ion-col>
             <ion-item lines="none">
               <!-- <ion-label><ion-icon name="partly-sunny-outline"></ion-icon></ion-label> -->
-              <ion-select interface="popover" placeholder="Season" [multiple]="true" name="seasons" (ionChange)="handleChange($event)">
+              <ion-select interface="popover" placeholder="Season" [multiple]="true" name="seasons" (ionChange)="handleSChange($event)">
                 <ion-select-option name="seasons" value="&Season=Spring">Spring</ion-select-option>
                 <ion-select-option name="seasons" value="&Season=Summer">Summer</ion-select-option>
                 <ion-select-option name="seasons" value="&Season=Fall">Fall</ion-select-option>
@@ -28,7 +28,7 @@
           <ion-col>
             <ion-item lines="none">
               <!-- <ion-label><ion-icon name="shirt-outline"></ion-icon></ion-label> -->
-              <ion-select interface="popover" placeholder="Type" [multiple]="true" name="types" (ionChange)="handleChange($event)">
+              <ion-select interface="popover" placeholder="Type" [multiple]="true" name="types" (ionChange)="handleTChange($event)">
                 <ion-select-option name="types" value="&Item_type=Top">Top</ion-select-option>
                 <ion-select-option name="types" value="&Item_type=Bottom">Bottom</ion-select-option>
               </ion-select>
