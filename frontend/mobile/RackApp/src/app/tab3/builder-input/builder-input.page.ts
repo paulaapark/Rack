@@ -3,6 +3,8 @@ import { RackService } from 'src/app/services/rack.service';
 import { UserService } from 'src/app/services/user.service';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { concat } from 'rxjs';
+import { map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-builder-input',
@@ -10,28 +12,31 @@ import { concat } from 'rxjs';
   styleUrls: ['./builder-input.page.scss'],
 })
 export class BuilderInputPage implements OnInit {
+  public builder!: boolean;
+  public loading!: boolean;
+  public results: boolean = false;
   public myDate = new Date();
   public hrs = this.myDate.getHours();
   public timeOfDay: string;
-  userRack: any;
-  filteredRack: any;
+  public userRack: any;
+  filteredRack: any = [];
+  filteredRackArray:any = [];
+
   generatedItem: any;
-  generatedArray: any;
+  public generatedItems: any = [];
   builderForm;
   filterQuery: any;
   filterQueryArray: any = [];
  
+  seasons:any = [];
+  item_types:any = [];
   item!:any;
-  selectedSeasons: any = [];
-  selectedTypes: any = [];
-  strSelSeasons!: any;
-  strSelTypes!: any;
   itemArray!: any;
   formData!: object;
   strItem!: any;
 
 
-  constructor(public userService: UserService, public rackService: RackService, private formBuilder: FormBuilder) {
+  constructor(public userService: UserService, public rackService: RackService, private formBuilder: FormBuilder, private http:HttpClient) {
     if (this.hrs < 12) {
       this.timeOfDay = 'morning';
     } else if (this.hrs >= 12 && this.hrs <= 17) {
@@ -45,21 +50,18 @@ export class BuilderInputPage implements OnInit {
         this.itemInit(),
       ])
     });
-
-
   }
 
-
-
   ngOnInit() {
-
+    this.builder = true;
+    
   }
 
 
   itemInit() {
     return this.formBuilder.group({
       Season: ['', [Validators.required]],
-      Item_type: ['', [Validators.required]]
+      Item_type: ['', [Validators.required]],
     })
   }
 
@@ -74,79 +76,69 @@ export class BuilderInputPage implements OnInit {
   }
 
   onSubmit() {
+    this.builder = false;
+    this.loading = true;
     this.formData = this.builderForm.value;
-    // console.log(this.formData);
-
-
     this.itemArray = this.builderForm.value.items;
 
 
-    // console.log(this.itemArray);
-    // let strItems = JSON.stringify(this.itemArray);
-
     for (let i = 0; i < this.itemArray.length; i++) {
-      // let Seasons = this.itemArray[i].Season;
-      // this.strSelSeasons = Seasons.toString();
-
-      // let Item_types=this.itemArray[i].Item_type;
-      // this.strSelTypes = Item_types.toString();
+      if (this.itemArray[i].Season.length > 1){
+        let multiSeason = this.itemArray[i].Season.join("");
+        this.seasons.push(multiSeason);
+      }
+      else if (this.itemArray[i].Season.length = 1) {
+        this.seasons.push(this.itemArray[i].Season);
+      };
+      if (this.itemArray[i].Item_type.length > 1){
+        let multiType = this.itemArray[i].Item_type.join("");
+        this.item_types.push(multiType);
+      }
+      else if (this.itemArray[i].Item_type.length = 1){
+        this.item_types.push(this.itemArray[i].Item_type);
+      };
       
-      // this.filterQuery = concat(this.strSelSeasons, this.strSelTypes);
-      // this.filterQueryArray.push(this.filterQuery);
-
-      //This didnt work
-      let season = this.itemArray[i].Season.join();
-      let item_type = this.itemArray[i].Item_type.join();
-      this.filterQuery = concat(season, item_type);
-      // this.strItem = this.item.toString();
-
-      this.filterQueryArray.push(this.filterQuery);
+      this.filterQueryArray = this.seasons.map((e:any, i:number) => e + this.item_types[i]);
 
     }
 
-    console.log(this.filterQueryArray);
+      for (let i = 0; i < this.filterQueryArray.length; i++){
+        this.filterQuery = this.filterQueryArray[i];
 
-    // for(let i =0; i < this.itemArray.length; i++){
-    //   let Seasons=this.itemArray[i].Season
-    //   if (Seasons.length < 1) {
-    //     this.strSelSeasons = Seasons.toString();
-    //   }
-    //   else {
-    //     this.strSelSeasons = Seasons.join("&Season=");
-    //   };
-    //   this.selectedSeasons.push(this.strSelSeasons);
-    //   let Item_types=this.itemArray[i].Item_type;
-    //   if (Item_types.length < 1) {
-    //     this.strSelTypes = Item_types.toString();
-    //   }
-    //   else {
-    //     this.strSelTypes = Item_types.join("&Item_type=");
-    //   };
-    //   this.selectedTypes.push(this.strSelTypes);
-    // }
+        this.getFilter().subscribe((res: any) => {
+          this.filteredRack = Object.values(res);
+          this.filteredRackArray.push(this.filteredRack);
+        });
+        
+    }
 
+    console.log(this.filteredRackArray); //it works up to here. the randomizer is having trouble
 
+    for (let i = 0; i < this.filteredRackArray.length; i++){
+      if (this.filteredRackArray[i].length > 1){
+        for (let i = 0; i < this.filteredRackArray[i].length; i++){
+          this.generatedItem = this.filteredRackArray[i][Math.floor(Math.random()*this.filteredRackArray[i].length)];
+          this.generatedItems.push(this.generatedItem);
+        } 
+      }
+      else {
+        this.generatedItem = this.filteredRackArray[i];
+        this.generatedItems.push(this.generatedItem);
+      }
+      
+    }
 
-    // console.log(this.selectedTypes);
-    // console.log(this.selectedSeasons);
+    console.log(this.generatedItems);
 
-
-
-    // this.rackService.getUserRack().subscribe(res => {
-    //   this.userRack = Object.values(res);
-    // });
-
-
-    // this.filteredRack = this.userRack.filter(this.filterQuery)
-
-
-
-
-    // let generatedItem = filteredRack[Math.floor(Math.random() * filteredRack.length)];
-
-
-
+    
+    this.loading=false;
+    
+    // this.loading = false; // I WANT THIS TO BE TRUE AND THEN TIMEOUT RANDOMLY
+    this.results = true;
 
   }
 
+  getFilter(){
+    return this.http.get(this.rackService.userURL + this.filterQuery);
+  };
 }

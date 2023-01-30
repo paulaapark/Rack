@@ -2,7 +2,7 @@
 
 <ion-content [fullscreen]="true" id="main-content" class="ion-padding">
   <!-- *ngIf to show/hide each respective div as needed in the sequence -->
-  <div class="builder" >
+  <div class="builder" *ngIf="builder">
     <br>
     <h2 class="title-theme">Outfit Builder</h2>
     <h5>{{ userService.currentUser.FirstName }} X RACK Collab</h5>
@@ -54,36 +54,35 @@
     </form>
   </div>
 
-  <div class="loading" hidden="true">
+  <div class="loading" *ngIf="loading">
     <br>
     <h2 class="title-theme">Outfit Builder</h2>
     <h5>{{ userService.currentUser.FirstName }} X RACK Collab</h5>
     <br>
     <ion-progress-bar type="indeterminate"></ion-progress-bar>
+    <!-- loading bar for a random number of seconds between 3 and 7 and then show the content -->
+    <br>
   </div>
 
-  <div class="results" hidden="true">
+  <div class="results" *ngIf="results">
     <br>
     <h2 class="title-theme">Our Latest Outfit</h2>
     <h5>{{ userService.currentUser.FirstName }} X RACK Collab</h5>
     <br>
     <br>
-    <ion-progress-bar type="indeterminate"></ion-progress-bar>
-    <!-- loading bar for a random number of seconds between 3 and 7 and then show the content -->
-    <br>
-    <!-- span Item i -->
-    <!-- *ngFor="let generatedItem of generated Items" to iterate through all items generated where i=index? or something -->
-    <ion-card>
-      <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-      <ion-card-header>
-        <ion-card-title>Generated outfit card(s) - Title </ion-card-title>
-        <ion-card-subtitle>#type #season</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-button slot="icon-only" fill="clear"><ion-icon name="information-circle-outline"></ion-icon></ion-button>
-        <!-- try using a grid and columns to get this icon on the same lvl as the card header and have no content at all? -->
-      </ion-card-content>
-    </ion-card>
+    <div class="ion-padding" *ngFor="let item of generatedItems; let i=index">
+      <span>Item #{{i + 1}}</span>
+      <ion-card >
+        <img alt="Default T-Shirt Image" src="assets/images/generic-top.jpg" />      
+        <ion-card-header>
+          <ion-card-title>{{item.Title}} </ion-card-title>
+          <ion-card-subtitle>#{{item.Season}} #{{item.Item_type}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    
     <br>
     <h5>Hope this does the trick!</h5>
     <br>

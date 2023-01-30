@@ -1,21 +1,19 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit  } from '@angular/core';
 
-import { Chart } from 'chart.js';
 import { UserService } from 'src/app/services/user.service';
 import { RackService } from 'src/app/services/rack.service';
-import { Irack } from 'src/app/interfaces/irack';
-
+import { ChartConfiguration } from 'chart.js';
 
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.page.html',
   styleUrls: ['./stats.page.scss'],
 })
-export class StatsPage implements AfterViewInit {
-  // @ViewChild('barCanvas') private barCanvas: ElementRef;
-  // @ViewChild('doughnutCanvas') private doughnutCanvas!: ElementRef;
+export class StatsPage implements OnInit   {
+  // @ViewChild('barCanvas') public barCanvas!: ElementRef;
+  // @ViewChild('doughnutCanvas') public doughnutCanvas!: ElementRef;
 
-  userRack!: Irack[];
+  userRack!:any;
   //is there a way to condense this?
   sumSpring!: number;
   sumSummer!: number;
@@ -29,14 +27,26 @@ export class StatsPage implements AfterViewInit {
   itemF: string = "items";
   itemW: string = "items";
 
-  // barChart: any;
-  // doughnutChart: any;
+
+  public doughnutChartLabels!: string[];
+
+  public barChartData!: ChartConfiguration<'bar'>['data']; 
+  public doughnutChartData!: ChartConfiguration<'doughnut'>['data']['datasets'];
+
+
+  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
+    responsive: false,
+  };
+  public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
+    responsive: false
+  };
 
   constructor(public userService: UserService, public rackService: RackService) {
+  
   }
 
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.rackService.getUserRack().subscribe(res => {
       this.userRack = Object.values(res);
     });
@@ -77,11 +87,24 @@ export class StatsPage implements AfterViewInit {
       this.sumBottoms = Object.values(res).length;
     })
 
+    
     // this.doughnutChartMethod();
     // this.barChartMethod();
   }
 
+  ionViewDidEnter(){
+    this.barChartData = {
+      labels: [ 'Spring', 'Summer', 'Fall', 'Winter'],
+      datasets: [
+        { data: [ this.sumSpring, this.sumSummer, this.sumFall, this.sumWinter ], label: 'Current Seasonal Clothing Spread' }
+      ]
+    };
+    this.doughnutChartLabels = ['Tops', 'Bottoms'];
 
+    this.doughnutChartData = [
+      { data: [ this.sumTops, this.sumBottoms ], label: 'Current Proportion of Tops vs Bottoms' }
+    ];
+  }
   // barChartMethod() {
   //   // Now we need to supply a Chart element reference with an object that defines the type of chart we want to use, and the type of data we want to display.
   //   this.barChart = new Chart(this.barCanvas.nativeElement, {
@@ -90,7 +113,7 @@ export class StatsPage implements AfterViewInit {
   //       labels: ['Spring', 'Summer', 'Fall', 'Winter'],
   //       datasets: [{
   //         label: '# of Seasonal Clothes',
-  //         data: [200, 50, 30, 15, 20, 34],
+  //         data: [this.sumSpring, this.sumSummer, this.sumFall, this.sumWinter],
   //         backgroundColor: [
   //           'rgba(255, 99, 132, 0.2)',
   //           'rgba(54, 162, 235, 0.2)',
@@ -112,11 +135,11 @@ export class StatsPage implements AfterViewInit {
   //     },
   //     options: {
   //       scales: {
-  //         // yAxes: [{
-  //         //   ticks: {
-  //         //     beginAtZero: true
-  //         //   }
-  //         // }]
+  //         y: {
+  //           ticks: {
+  //             // beginAtZero: true
+  //           }
+  //         }
   //       }
   //     }
   //   });

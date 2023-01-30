@@ -47,7 +47,6 @@ export class Tab2Page {
   }
 
   handleTChange(e:any){
-
     this.item_types = (e.detail.value);
     this.handleChange();
   }

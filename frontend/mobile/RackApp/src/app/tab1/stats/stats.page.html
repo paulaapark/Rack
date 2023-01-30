@@ -8,28 +8,38 @@
   <ion-text><h2 class="title-theme">{{ userService.currentUser.FirstName }}, your latest Rack Stats await!</h2></ion-text>
 
   <br>
-  <ion-text>
-    <p>
-      You have {{sumSpring}} spring {{itemS}}, {{sumSummer}} summer {{itemSu}},<br>
-      {{sumFall}} fall {{itemF}}, and {{sumWinter}} winter {{itemW}}!<br>
-    </p>
-  </ion-text>
+  
   <div class="ion-padding">
     <ion-card>
       <ion-card-header>
-        Bar Chart
+        Rack Stats: by Season
       </ion-card-header>
       <ion-card-content>
-        <canvas #barCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+        <canvas baseChart 
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [legend]="false"
+        [type]="'bar'" ></canvas>
       </ion-card-content>
     </ion-card>
-
+    <ion-text>
+      <small>
+        You have {{sumSpring}} spring {{itemS}}, {{sumSummer}} summer {{itemSu}},
+        {{sumFall}} fall {{itemF}}, and {{sumWinter}} winter {{itemW}}!<br>
+      </small>
+    </ion-text>
+    <br>
     <ion-card>
       <ion-card-header>
-        Doughnut Chart
+        Rack Stats: Tops vs Bottoms
       </ion-card-header>
       <ion-card-content>
-        <canvas #doughnutCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+        <canvas baseChart 
+        [labels]="doughnutChartLabels"
+        [datasets]="doughnutChartData"
+        [options]="doughnutChartOptions"
+        [legend]="false"
+        [type]="'doughnut'"></canvas>
       </ion-card-content>
     </ion-card>
   </div>
