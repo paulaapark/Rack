@@ -19,24 +19,24 @@ export class BuilderInputPage implements OnInit {
   public hrs = this.myDate.getHours();
   public timeOfDay: string;
   public userRack: any;
-  filteredRack: any = [];
-  filteredRackArray:any = [];
+  public filteredRack: any = [];
+  public filteredRackArray: any = [];
 
   generatedItem: any;
   public generatedItems: any = [];
   builderForm;
   filterQuery: any;
-  filterQueryArray: any = [];
- 
-  seasons:any = [];
-  item_types:any = [];
-  item!:any;
+  filterQueryArray: any;
+
+  seasons: any = [];
+  item_types: any = [];
+  item!: any;
   itemArray!: any;
   formData!: object;
   strItem!: any;
 
 
-  constructor(public userService: UserService, public rackService: RackService, private formBuilder: FormBuilder, private http:HttpClient) {
+  constructor(public userService: UserService, public rackService: RackService, private formBuilder: FormBuilder, private http: HttpClient) {
     if (this.hrs < 12) {
       this.timeOfDay = 'morning';
     } else if (this.hrs >= 12 && this.hrs <= 17) {
@@ -54,7 +54,7 @@ export class BuilderInputPage implements OnInit {
 
   ngOnInit() {
     this.builder = true;
-    
+
   }
 
 
@@ -83,62 +83,57 @@ export class BuilderInputPage implements OnInit {
 
 
     for (let i = 0; i < this.itemArray.length; i++) {
-      if (this.itemArray[i].Season.length > 1){
+      if (this.itemArray[i].Season.length > 1) {
         let multiSeason = this.itemArray[i].Season.join("");
         this.seasons.push(multiSeason);
       }
       else if (this.itemArray[i].Season.length = 1) {
         this.seasons.push(this.itemArray[i].Season);
       };
-      if (this.itemArray[i].Item_type.length > 1){
+      if (this.itemArray[i].Item_type.length > 1) {
         let multiType = this.itemArray[i].Item_type.join("");
         this.item_types.push(multiType);
       }
-      else if (this.itemArray[i].Item_type.length = 1){
+      else if (this.itemArray[i].Item_type.length = 1) {
         this.item_types.push(this.itemArray[i].Item_type);
       };
-      
-      this.filterQueryArray = this.seasons.map((e:any, i:number) => e + this.item_types[i]);
-
     }
+    //merging the queries per item for the same i
+    this.filterQueryArray = this.seasons.map((e: any, i: number) => e + this.item_types[i]);
 
-      for (let i = 0; i < this.filterQueryArray.length; i++){
-        this.filterQuery = this.filterQueryArray[i];
+    // console.log(this.filterQueryArray);
 
-        this.getFilter().subscribe((res: any) => {
-          this.filteredRack = Object.values(res);
-          this.filteredRackArray.push(this.filteredRack);
-        });
-        
-    }
+    for (let i = 0; i < this.filterQueryArray.length; i++) {
+      this.filterQuery = this.filterQueryArray[i];  //this is working in the getFilter http get function
+      this.getFilter().subscribe((res: any) => {
+        this.filteredRack = Object.values(res);
+        this.filteredRackArray.push(this.filteredRack);
 
-    console.log(this.filteredRackArray); //it works up to here. the randomizer is having trouble
-
-    for (let i = 0; i < this.filteredRackArray.length; i++){
-      if (this.filteredRackArray[i].length > 1){
-        for (let i = 0; i < this.filteredRackArray[i].length; i++){
-          this.generatedItem = this.filteredRackArray[i][Math.floor(Math.random()*this.filteredRackArray[i].length)];
+        if (this.filteredRack.length > 1) {
+          this.generatedItem = this.filteredRack[Math.floor(Math.random() * this.filteredRack.length)];
           this.generatedItems.push(this.generatedItem);
-        } 
-      }
-      else {
-        this.generatedItem = this.filteredRackArray[i];
-        this.generatedItems.push(this.generatedItem);
-      }
-      
+        }
+        else if (this.filteredRack.length == 1) {
+          this.generatedItems.push(this.filteredRack);
+        };
+
+      });
     }
 
+    console.log(this.filteredRackArray);
     console.log(this.generatedItems);
 
-    
-    this.loading=false;
-    
+
+    this.loading = false;
+
     // this.loading = false; // I WANT THIS TO BE TRUE AND THEN TIMEOUT RANDOMLY
     this.results = true;
 
+
   }
 
-  getFilter(){
+
+  getFilter() {
     return this.http.get(this.rackService.userURL + this.filterQuery);
   };
 }

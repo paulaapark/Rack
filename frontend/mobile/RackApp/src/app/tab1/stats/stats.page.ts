@@ -26,6 +26,8 @@ export class StatsPage implements OnInit   {
   itemSu: string = "items";
   itemF: string = "items";
   itemW: string = "items";
+  topsG: string = "tops";
+  bottomsG: string = "bottoms";
 
 
   public doughnutChartLabels!: string[];
@@ -81,10 +83,16 @@ export class StatsPage implements OnInit   {
 
     this.rackService.getUserTops().subscribe(res => {
       this.sumTops = Object.values(res).length;
+      if (this.sumTops == 1) {
+        this.topsG = "top"
+      };
     })
 
     this.rackService.getUserBottoms().subscribe(res => {
       this.sumBottoms = Object.values(res).length;
+      if (this.sumBottoms == 1) {
+        this.bottomsG = "bottom"
+      };
     })
 
     

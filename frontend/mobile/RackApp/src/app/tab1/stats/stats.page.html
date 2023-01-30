@@ -1,13 +1,8 @@
 <app-default-head></app-default-head>
 
 <ion-content fullscreen="true" id="main-content">
-
-  <br>
-  <br>
   <br>
   <ion-text><h2 class="title-theme">{{ userService.currentUser.FirstName }}, your latest Rack Stats await!</h2></ion-text>
-
-  <br>
   
   <div class="ion-padding">
     <ion-card>
@@ -20,14 +15,16 @@
         [options]="barChartOptions"
         [legend]="false"
         [type]="'bar'" ></canvas>
+        <br>
+        <ion-text>
+          <small>
+            You have {{sumSpring}} spring {{itemS}}, {{sumSummer}} summer {{itemSu}}, <br>
+            {{sumFall}} fall {{itemF}}, and {{sumWinter}} winter {{itemW}}!
+          </small>
+        </ion-text>
       </ion-card-content>
     </ion-card>
-    <ion-text>
-      <small>
-        You have {{sumSpring}} spring {{itemS}}, {{sumSummer}} summer {{itemSu}},
-        {{sumFall}} fall {{itemF}}, and {{sumWinter}} winter {{itemW}}!<br>
-      </small>
-    </ion-text>
+    
     <br>
     <ion-card>
       <ion-card-header>
@@ -40,8 +37,15 @@
         [options]="doughnutChartOptions"
         [legend]="false"
         [type]="'doughnut'"></canvas>
+        <br>
+        <ion-text>
+          <small>
+            You have {{sumTops}} {{topsG}} and {{sumBottoms}} {{bottomsG}}!
+          </small>
+        </ion-text>
       </ion-card-content>
     </ion-card>
+    
   </div>
 
 </ion-content>
