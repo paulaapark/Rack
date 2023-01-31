@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="../tabs">Later</ion-button>
+    </ion-buttons>
+    <ion-title>RACK</ion-title> <!-- title will become logo image -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <br>
+  <br>
+  <ion-text>
+    <h3>Last Step! </h3>
+  Let's get acquainted
+  </ion-text>
+  <br>
+  <br>
+  <br>
+  <form [formGroup]="detailsForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>When's your birthday?</ion-label>
+        <ion-input type="date" placeholder="" formControlName="birthday" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>What's your gender?</ion-label>
+        <ion-input type="text" placeholder="" formControlName="gender" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>What do you look like?</ion-label>
+        <ion-input type="text" placeholder="" formControlName="image"></ion-input>
+      </ion-item>
+    </ion-list>
+    <br>
+    <ion-button expand="block" (click)="details()">All set!</ion-button>
+  </form>
+  <br>
+  <br>
+  <br>
+  <ion-text>Powered by Paula Anderson</ion-text>
+</ion-content>

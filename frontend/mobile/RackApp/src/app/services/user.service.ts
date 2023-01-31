@@ -9,12 +9,18 @@ export class UserService {
   constructor(private http:HttpClient) { }
   public currentUser: any = JSON.parse(localStorage.getItem('currentUser')!);
 
+  detailsURL:string= 'http://localhost:3000/details/' + this.currentUser.id;
+
   login(formData:object){
     return this.http.post('http://localhost:3000/login', formData);
   }
 
   signup(formData:object){
     return this.http.post('http://localhost:3000/signup', formData);
+  }
+
+  details(formData:object){
+    return this.http.post(this.detailsURL, formData);
   }
 
   get_current_user(){

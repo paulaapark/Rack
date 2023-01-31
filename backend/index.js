@@ -58,6 +58,36 @@ app.post('/signup', async (req, res) => {
     });
 });
 
+app.patch('/details/:id', function(req, res) {
+    const { Birthday, Gender, Image} = req.body;
+
+    let id = parseInt(req.params.id);
+    User.findByPk(id)
+    .then(function(result){
+        if(result){
+            result.Birthday = Birthday;
+            result.Gender = Gender;
+            result.Image = Image;
+            
+            //save record back to database
+            result.save().then(function(){
+                res.status(200).send(result);
+            })
+            .catch(function(err){
+                res.send(err);
+            });
+
+        }else{
+            res.status(404).send('User was not found');
+        }
+    })
+    .catch(function(err){
+        res.send(err);
+    });
+    
+    // res.redirect('/students');
+});
+
 app.post('/login', async (req, res) => {
 
     const {Email, Password} = req.body;
@@ -136,46 +166,6 @@ app.get('/rack', function(req, res){
     });
 
 });
-
-// app.get('/rack/:User_id', function(req, res){
-//     let User_id = req.params.User_id;
-//     let rack_data = {where: {User_id}};
-//     Rack.findAll(rack_data).then(function(results){
-//         res.status(200).send(results);
-//     }).catch(function(err){
-//         res.status(500).send(err);
-//     });
-// });
-
-// app.get('/rack', function(req, res){
-//     res.send('User_id: ' + req.query.User_id);
-// });
-
-// app.get('/rack/:User_id/:Season', function(req, res){
-//     let User_id = req.params.User_id;
-//     let Season = req.params.Season;
-//     let rack_data = {where: {User_id, Season}, include:User};
-//     Rack.findAll(rack_data).then(function(results){
-//         res.status(200).send(results);
-//     }).catch(function(err){
-//         res.status(500).send(err);
-//     });
-// });
-
-
-
-
-//not working how I want it to
-// app.get('/rack/:User_id/:Type', function(req, res){
-//     let User_id = req.params.User_id;
-//     let Type = req.params.Type;
-//     let rack_data = {where: {User_id, Type}};
-//     Rack.findAll(rack_data).then(function(results){
-//         res.status(200).send(results);
-//     }).catch(function(err){
-//         res.status(500).send(err);
-//     });
-// });
 
 
 
