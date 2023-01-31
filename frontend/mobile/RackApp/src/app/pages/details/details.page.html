@@ -12,25 +12,46 @@
   <br>
   <ion-text>
     <h3>Last Step! </h3>
-  Let's get acquainted
+    Let's get acquainted
   </ion-text>
   <br>
   <br>
   <br>
   <form [formGroup]="detailsForm">
+
     <ion-list>
+
       <ion-item>
         <ion-label>When's your birthday?</ion-label>
-        <ion-input type="date" placeholder="" formControlName="birthday" required></ion-input>
+        <!-- <ion-input type="date" placeholder="" formControlName="Birthday" required></ion-input> -->
+        <!-- <ion-select>
+          <ion-datetime presentation="date" [preferWheel]="true"></ion-datetime>
+        </ion-select> -->
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="datetime" presentation="date" [preferWheel]="true"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+
       </ion-item>
       <ion-item>
         <ion-label>What's your gender?</ion-label>
-        <ion-input type="text" placeholder="" formControlName="gender" required></ion-input>
+        <ion-select interface="popover" placeholder="Select" formControlName="Gender" required>
+          <ion-select-option value="Female">Female</ion-select-option>
+          <ion-select-option value="Male">Male</ion-select-option>
+          <ion-select-option value="Non-Binary">Non-Binary</ion-select-option>
+          <ion-select-option value="Prefer not to answer">Prefer not to answer</ion-select-option>
+        </ion-select>
       </ion-item>
 
       <ion-item>
         <ion-label>What do you look like?</ion-label>
-        <ion-input type="text" placeholder="" formControlName="image"></ion-input>
+        <ion-chip (click)="takePicture()">
+          <ion-icon name="image-outline" color="primary"></ion-icon>
+          <ion-label>Upload a selfie </ion-label>
+        </ion-chip>
       </ion-item>
     </ion-list>
     <br>

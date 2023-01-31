@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { Camera, CameraResultType } from '@capacitor/camera';
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.page.html',
@@ -12,11 +14,13 @@ export class DetailsPage implements OnInit {
 
   detailsForm;
 
+  imageUrl:string|undefined = '';
+
   constructor(private service:UserService, private formBuilder: FormBuilder, private router:Router, private route:ActivatedRoute) { 
     this.detailsForm = formBuilder.group({
-      birthday: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      image: ['']
+      Birthday: ['', [Validators.required]],
+      Gender: ['', [Validators.required]],
+      Image: ['']
     });
   }
 
@@ -28,28 +32,47 @@ export class DetailsPage implements OnInit {
     this.service.details(formData).subscribe({
         next: (result) => {
           console.log(result);
-          alert('Thank you!');
+          alert('Nice getting to know you!');
           this.router.navigate(['../tabs'], {relativeTo: this.route});
         }, 
         error: error => {
-        alert('Error - please try again');
+        alert('Sorry, something went wrong');
         console.error(error);
         }
     });
   }
 
-  get birthdayFormControl(){
-    return this.detailsForm.get('birthday')!;
+  get BirthdayFormControl(){
+    return this.detailsForm.get('Birthday')!;
   }
 
-  get genderFormControl(){
-    return this.detailsForm.get('gender')!;
+  get GenderFormControl(){
+    return this.detailsForm.get('Gender')!;
   }
-  get imageFormControl(){
-    return this.detailsForm.get('image')!;
+  get ImageFormControl(){
+    return this.detailsForm.get('Image')!;
   }
 
-
+  takePicture(){
+    const snapPicture = async () => {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Uri
+      });
+    
+      // image.webPath will contain a path that can be set as an image src.
+      // You can access the original file using image.path, which can be
+      // passed to the Filesystem API to read the raw data of the image,
+      // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+      this.imageUrl = image.webPath;
+    
+      // Can be set to the src of an image now
+      // imageElement.src = imageUrl;
+      // alert(imageUrl);
+    };
+    snapPicture();
+  }
 
 }
 
