@@ -1,8 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs';
-import { map } from 'rxjs';
-import { Tab2Page } from '../tab2/tab2.page';
 
 import { UserService } from './user.service';
 
@@ -11,7 +8,7 @@ import { UserService } from './user.service';
 })
 export class RackService {
   baseURL:string = 'http://localhost:3000/rack';
-  typeQuery:string = '&Item_Type=';
+  typeQuery:string = '&Item_type=';
   seasonQuery:string = '&Season=';
 
   selectedSeasons:string='';
@@ -35,16 +32,16 @@ export class RackService {
 
   
 
-  getFilteredSeasons(){
-    return this.http.get(this.userURL + this.seasonQuery + this.selectedSeasons)
-  };
-  getFilteredTypes(){
-    return this.http.get(this.userURL + this.typeQuery + this.selectedTypes)
-  };
+  // getFilteredSeasons(){
+  //   return this.http.get(this.userURL + this.seasonQuery + this.selectedSeasons)
+  // };
+  // getFilteredTypes(){
+  //   return this.http.get(this.userURL + this.typeQuery + this.selectedTypes)
+  // };
 
-  getFilteredMulti(){
-    return this.http.get(this.userURL + this.seasonQuery + this.selectedSeasons + this.typeQuery + this.selectedTypes)
-  };
+  // getFilteredMulti(){
+  //   return this.http.get(this.userURL + this.seasonQuery + this.selectedSeasons + this.typeQuery + this.selectedTypes)
+  // };
 
   getUserTops(){
     return this.http.get(this.userURL + this.typeQuery + 'Top')
