@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { NgModule } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,7 @@ public greeting:string;
 
 
 
-  constructor(public userService:UserService) {
+  constructor(public userService:UserService, private router:Router, private route:ActivatedRoute) {
     if (this.hrs < 12){
       this.greeting = 'Good Morning';
     }else if ( this.hrs >= 12 && this.hrs <=17){
@@ -26,5 +27,9 @@ public greeting:string;
   }
 
   ngOnInit() {
+  }
+
+  stats(){
+    this.router.navigate(['stats'], {relativeTo: this.route});
   }
 }

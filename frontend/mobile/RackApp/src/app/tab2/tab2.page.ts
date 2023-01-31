@@ -37,7 +37,7 @@ export class Tab2Page {
       this.mainRackFunction = this.service.getUserRack();
       this.mainRackFunction.subscribe((res: any) => {
         this.userRack = Object.values(res);
-      })
+      });
     }
   }
 
@@ -63,7 +63,16 @@ export class Tab2Page {
   }
 
   getFilter(){
-    return this.http.get(this.service.userURL + this.strSel)
-  };
+    return this.http.get(this.service.userURL + this.strSel);
+  }
+
+
+  showDetails(){
+    console.log(this.userRack);
+
+    //want to get the id and use it to get info in either a modal or something
+
+    
+  }
 }
 

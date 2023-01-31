@@ -34,18 +34,7 @@
               </ion-select>
             </ion-item>
           </ion-col>
-          <!-- <ion-col>
-            <ion-item lines="none">
-              <ion-label><ion-icon name="color-palette-outline"></ion-icon></ion-label>
-              <ion-input disabled placeholder="Color"></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item lines="none">
-              <ion-label><ion-icon name="sparkles-outline"></ion-icon></ion-label> 
-              <ion-input disabled placeholder="Style"></ion-input>
-            </ion-item>
-          </ion-col> -->
+          
       </ion-row>
       <ion-row>
         <ion-col>
@@ -54,70 +43,12 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <!-- <ion-row>
-         
-        <ion-col>
-          <form>
-            <ion-button id="season-button" fill="clear" size="small"><ion-icon
-                name="partly-sunny-outline"></ion-icon><label for="season">Season</label></ion-button>
-            <ion-popover trigger="season-button" triggerAction="click">
-              <ng-template>
-                <ion-content class="ion-padding">
-                  <ion-list>
-                    <ion-item>
-                      <ion-checkbox slot="start" name="season" value="Spring" id="Spring"
-                        (ionChange)="onSeasonCheckboxChange($event)"></ion-checkbox>
-                      <ion-label>Spring</ion-label>
-                    </ion-item>
-                    <ion-item>
-                      <ion-checkbox slot="start" name="season" value="Summer" id="Summer"
-                        (ionChange)="onSeasonCheckboxChange($event)"></ion-checkbox>
-                      <ion-label>Summer</ion-label>
-                    </ion-item>
-                    <ion-item>
-                      <ion-checkbox slot="start" name="season" value="Fall" id="Fall"
-                        (ionChange)="onSeasonCheckboxChange($event)"></ion-checkbox>
-                      <ion-label>Fall</ion-label>
-                    </ion-item>
-                    <ion-item>
-                      <ion-checkbox slot="start" name="season" value="Winter" id="Winter"
-                        (ionChange)="onSeasonCheckboxChange($event)"></ion-checkbox>
-                      <ion-label>Winter</ion-label>
-                    </ion-item>
-                  </ion-list>
-                </ion-content>
-              </ng-template>
-            </ion-popover>
-          </form>
-        </ion-col>
-        <ion-col><ion-button id="type-button" fill="clear" size="small"><ion-icon name="shirt-outline"></ion-icon><label for="type">Type</label>
-            </ion-button>
-          <ion-popover trigger="type-button" triggerAction="click">
-            <ng-template>
-              <ion-content class="ion-padding">
-                <ion-list>
-                  <ion-item>
-                    <ion-checkbox slot="start" value="Top" id="Top" name="type" (ionChange)="onTypeCheckboxChange($event)"></ion-checkbox>
-                    <ion-label>Tops</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-checkbox slot="start" value="Bottom" id="Bottom" name="type" (ionChange)="onTypeCheckboxChange($event)"></ion-checkbox>
-                    <ion-label>Bottoms</ion-label>
-                  </ion-item>
-                </ion-list>
-              </ion-content>
-            </ng-template>
-          </ion-popover></ion-col>
-        <ion-col><ion-button disabled fill="clear" size="small"><ion-icon
-              name="color-palette-outline"></ion-icon>Color</ion-button></ion-col>
-        <ion-col><ion-button disabled fill="clear" size="small"><ion-icon
-              name="sparkles-outline"></ion-icon>Style</ion-button></ion-col>
-      </ion-row> -->
+      
     </div>
   </ion-grid>
 
   <div class="ion-padding" *ngFor="let item of userRack | filter:filterTerm">
-    <ion-card>
+    <ion-card (click)="showDetails()">
       <img alt="Default T-Shirt Image" src="assets/images/generic-top.jpg" />
       <ion-card-header>
         <ion-card-title>{{item.Title}} </ion-card-title>
@@ -126,7 +57,6 @@
       <ion-card-content>
       </ion-card-content>
     </ion-card>
-    <!-- incorporate infinite scroll to show users rack? https://ionicframework.com/docs/api/infinite-scroll -->
   </div>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" id="new-rack-modal">
