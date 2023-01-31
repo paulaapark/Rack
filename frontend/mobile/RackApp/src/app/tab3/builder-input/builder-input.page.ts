@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RackService } from 'src/app/services/rack.service';
 import { UserService } from 'src/app/services/user.service';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
-import { concat } from 'rxjs';
+import { concat, timer } from 'rxjs';
 import { map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -114,7 +114,7 @@ export class BuilderInputPage implements OnInit {
           this.generatedItems.push(this.generatedItem);
         }
         else if (this.filteredRack.length == 1) {
-          this.generatedItems.push(this.filteredRack);
+          this.generatedItems.push(this.filteredRack[0]);
         };
 
       });
@@ -123,12 +123,11 @@ export class BuilderInputPage implements OnInit {
     console.log(this.filteredRackArray);
     console.log(this.generatedItems);
 
+    
 
-    this.loading = false;
-
-    // this.loading = false; // I WANT THIS TO BE TRUE AND THEN TIMEOUT RANDOMLY
+    this.loading = false; // I WANT THIS TO BE TRUE AND THEN TIMEOUT RANDOMLY
+    
     this.results = true;
-
 
   }
 
@@ -136,4 +135,15 @@ export class BuilderInputPage implements OnInit {
   getFilter() {
     return this.http.get(this.rackService.userURL + this.filterQuery);
   };
+
+  showLoading(){
+    this.loading = true;
+    let min = 3;
+    let max = 7;
+    let rand = Math.floor(Math.random() * (max - min + 1) + min);
+    setTimeout(this.showLoading, rand * 1000);
+  }
+  showResults(){
+
+  }
 }
