@@ -24,10 +24,7 @@
       <ion-item>
         <ion-label>When's your birthday?</ion-label>
         <!-- <ion-input type="date" placeholder="" formControlName="Birthday" required></ion-input> -->
-        <!-- <ion-select>
-          <ion-datetime presentation="date" [preferWheel]="true"></ion-datetime>
-        </ion-select> -->
-        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-datetime-button formControlName="Birthday" datetime="datetime" required></ion-datetime-button>
 
         <ion-modal [keepContentsMounted]="true">
           <ng-template>
