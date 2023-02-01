@@ -35,6 +35,10 @@ export class BuilderInputPage implements OnInit {
   formData!: object;
   strItem!: any;
 
+  min:number = 3;
+  max:number = 7;
+  rand:number = Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
+
 
   constructor(public userService: UserService, public rackService: RackService, private formBuilder: FormBuilder, private http: HttpClient) {
     if (this.hrs < 12) {
@@ -54,6 +58,7 @@ export class BuilderInputPage implements OnInit {
 
   ngOnInit() {
     this.builder = true;
+    this.loading = false;
 
   }
 
@@ -123,11 +128,7 @@ export class BuilderInputPage implements OnInit {
     console.log(this.filteredRackArray);
     console.log(this.generatedItems);
 
-    
-
-    this.loading = false; // I WANT THIS TO BE TRUE AND THEN TIMEOUT RANDOMLY
-    
-    this.results = true;
+    setTimeout(() => {this.showResults()}, this.rand*1000);
 
   }
 
@@ -136,14 +137,9 @@ export class BuilderInputPage implements OnInit {
     return this.http.get(this.rackService.userURL + this.filterQuery);
   };
 
-  showLoading(){
-    this.loading = true;
-    let min = 3;
-    let max = 7;
-    let rand = Math.floor(Math.random() * (max - min + 1) + min);
-    setTimeout(this.showLoading, rand * 1000);
-  }
+  
   showResults(){
-
-  }
+    this.loading = false;
+    this.results = true;
+  };
 }
