@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="back()">Back</ion-button>
+    </ion-buttons>
+    <ion-title>Item Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="edit()">Edit</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <!-- <ion-label position="stacked">Your name</ion-label>
+    <ion-input [(ngModel)]="name" placeholder="Your name"></ion-input> -->
+  </ion-item>
+</ion-content>
+
+
+
+<!-- within the modal, have a duplicate of the content but make it an input 
+  and make the placeholder text the data of the item and then patch db backend. 
+  
+  if change was not made, dont patch the item?
+
+-->

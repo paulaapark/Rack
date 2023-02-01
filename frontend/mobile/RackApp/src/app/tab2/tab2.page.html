@@ -46,15 +46,16 @@
       
     </div>
   </ion-grid>
-<!-- modal outside ngFor  -->
-  <div class="ion-padding" *ngFor="let item of userRack | filter:filterTerm">
-    <ion-card (click)="showDetails()">
+
+  <div class="ion-padding" *ngFor="let item of userRack | filter:filterTerm; let i=index">
+    <ion-card (click)="openModal()">
       <img alt="Default T-Shirt Image" src="assets/images/generic-top.jpg" />
       <ion-card-header>
         <ion-card-title>{{item.Title}} </ion-card-title>
         <ion-card-subtitle>#{{item.Season}} #{{item.Item_type}} </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
+        <ion-button id="open-modal" expand="block" fill="clear">Details</ion-button>
       </ion-card-content>
     </ion-card>
   </div>

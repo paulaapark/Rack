@@ -1,9 +1,9 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { filter, Observable } from 'rxjs';
+import { Component, ViewChild, OnInit} from '@angular/core';
 import { RackService } from '../services/rack.service';
 // import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
+import { ModalController } from '@ionic/angular';
+import { ItemDetailsComponent } from '../components/item-details/item-details.component';
 
 @Component({
   selector: 'app-tab2',
@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+
   filterTerm: string = '';
   userRack: any;
   public show: boolean = false;
@@ -21,8 +22,27 @@ export class Tab2Page {
   seasons = [];
   item_types = [];
 
-  constructor(public service: RackService, private http: HttpClient) {
+  
+  // name!: string;
+
+  constructor(public service: RackService, private http: HttpClient, private modalCtrl: ModalController) {
   }
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: ItemDetailsComponent,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      // this.message = `Hello, ${data}!`;
+      // console.log(`Hello, ${data}!`);
+      console.log('success');
+    }
+  }
+  
 
   handleChange() {
     this.selection = this.seasons.concat(this.item_types);
@@ -67,12 +87,12 @@ export class Tab2Page {
   }
 
 
-  showDetails(){
-    console.log(this.userRack);
+  // showDetails(){
+  //   console.log(this.userRack);
 
-    //want to get the id and use it to get info in either a modal or something
+  //   //want to get the id and use it to get info in either a modal or something
 
-    
-  }
+
+  // }
 }
 
