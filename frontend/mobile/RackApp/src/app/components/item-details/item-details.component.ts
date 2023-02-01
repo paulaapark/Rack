@@ -8,21 +8,40 @@ import { ModalController } from '@ionic/angular';
 })
 export class ItemDetailsComponent implements OnInit {
   // name!: string;
+  defaultView!:boolean;
+  editView!:boolean;
 
   constructor(private modalCtrl: ModalController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.defaultView=true;
+    this.editView=false;
+  }
 
   back() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  edit() {
-    console.log('success');
-    // return this.modalCtrl.dismiss(this.name, 'confirm');
-    // return this.modalCtrl.dismiss(null, 'confirm');
+  cancelEdit(){
+    this.defaultView=true;
+    this.editView=false;
+
   }
 
+  edit() {
+    console.log('edit');
+    // return this.modalCtrl.dismiss(this.name, 'confirm');
+    // return this.modalCtrl.dismiss(null, 'confirm');
+    this.defaultView = false;
+    this.editView = true;
+  }
+
+
+  onSubmit() {
+    console.log('confirm');
+    // return this.modalCtrl.dismiss(this.name, 'confirm');
+    return this.modalCtrl.dismiss(null, 'confirm');
+  }
 
 
 }

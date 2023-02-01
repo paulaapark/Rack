@@ -1,3 +1,5 @@
+
+<div *ngIf="defaultView">
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -11,10 +13,30 @@
 </ion-header>
 <ion-content class="ion-padding">
   <ion-item>
-    <!-- <ion-label position="stacked">Your name</ion-label>
-    <ion-input [(ngModel)]="name" placeholder="Your name"></ion-input> -->
+    <img src="assets/images/generic-top.jpg" alt="">
   </ion-item>
 </ion-content>
+
+</div>
+
+<div *ngIf="editView">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button color="medium" (click)="cancelEdit()">Cancel Update</ion-button>
+      </ion-buttons>
+      <ion-title>Item Details</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="onSubmit()">Update Item</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-item>
+      <img src="assets/images/generic-top.jpg" alt="">
+    </ion-item>
+  </ion-content>
+</div>
 
 
 
