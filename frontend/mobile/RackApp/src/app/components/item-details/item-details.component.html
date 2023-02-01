@@ -11,32 +11,126 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
-  <ion-item>
-    <img src="assets/images/generic-top.jpg" alt="">
-  </ion-item>
-</ion-content>
-
 </div>
 
 <div *ngIf="editView">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-button color="medium" (click)="cancelEdit()">Cancel Update</ion-button>
+        <ion-button color="medium" (click)="cancelEdit()">Cancel Edit</ion-button>
       </ion-buttons>
-      <ion-title>Item Details</ion-title>
+      <ion-title>Edit Item</ion-title>
       <ion-buttons slot="end">
         <ion-button (click)="onSubmit()">Update Item</ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding">
-    <ion-item>
-      <img src="assets/images/generic-top.jpg" alt="">
-    </ion-item>
-  </ion-content>
 </div>
+
+
+<ion-content class="ion-padding">
+
+  <div *ngIf="defaultView">
+    <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            <ion-card-header>
+              <ion-card-title>
+                "Item.title"
+              </ion-card-title>
+            </ion-card-header>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col >
+          <ion-card>
+            <img src="assets/images/generic-top.jpg" alt="">
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+            <ion-card-subtitle>
+              #"Item.season" #"Item.type"
+            </ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              "item.description" Lorem ipsem set amet dolor blsgjkdghjaklsldghaklgdl
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  </div>
+  
+  <div *ngIf="editView">
+
+    <ion-card>
+      <form>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Title</ion-label>
+              <ion-input placeholder="Item.title"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col >
+            <ion-card>
+              <img src="assets/images/generic-top.jpg" alt="">
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-label>
+              <ion-select interface="popover" placeholder="Item.season" formControlName="Season">
+                <ion-select-option name="Season" value="&Season=Spring">Spring</ion-select-option>
+                <ion-select-option name="Season" value="&Season=Summer">Summer</ion-select-option>
+                <ion-select-option name="Season" value="&Season=Fall">Fall</ion-select-option>
+                <ion-select-option name="Season" value="&Season=Winter">Winter</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label><ion-icon name="shirt-outline"></ion-icon>Type</ion-label>
+              <ion-select interface="popover" placeholder="Item.type" formControlName="Item_type">
+                <ion-select-option name="Item_type" value="&Item_type=Top">Top</ion-select-option>
+                <ion-select-option name="Item_type" value="&Item_type=Bottom">Bottom</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Description</ion-label>
+                <ion-textarea placeholder="Item.description" [autoGrow]="true"
+                  value="">
+                </ion-textarea>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+    </ion-card>
+
+    <ion-button expand="block" fill="outline" (click)="presentAlert()">Delete Item</ion-button>
+
+  </div>
+
+
+
+</ion-content>
 
 
 

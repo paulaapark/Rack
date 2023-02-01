@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-item-details',
@@ -11,7 +11,10 @@ export class ItemDetailsComponent implements OnInit {
   defaultView!:boolean;
   editView!:boolean;
 
-  constructor(private modalCtrl: ModalController) { }
+  handlerMessage = '';
+  roleMessage = '';
+
+  constructor(private modalCtrl: ModalController, private alertController: AlertController) { }
 
   ngOnInit() {
     this.defaultView=true;
@@ -25,7 +28,7 @@ export class ItemDetailsComponent implements OnInit {
   cancelEdit(){
     this.defaultView=true;
     this.editView=false;
-
+    console.log('cancel edit')
   }
 
   edit() {
@@ -41,7 +44,47 @@ export class ItemDetailsComponent implements OnInit {
     console.log('confirm');
     // return this.modalCtrl.dismiss(this.name, 'confirm');
     return this.modalCtrl.dismiss(null, 'confirm');
+    //load & apply changes, toast successful item update 
   }
+
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Permanently delete from your Rack?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            this.handlerMessage = 'Alert canceled';
+          },
+
+          //cancel -> back to the edit page?
+        },
+        {
+          text: 'Yes',
+          role: 'confirm',
+          handler: () => {
+            this.handlerMessage = 'Alert confirmed';
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    this.roleMessage = `Dismissed with role: ${role}`;
+
+    //yes -> dismiss the modal & toast on tab 2 saying youve successfully deleted {{item.title}} from your rack
+    //http delete method service & backend
+  }
+
+  onDelete(){
+    
+    
+  }
+
 
 
 }
