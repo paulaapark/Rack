@@ -12,8 +12,10 @@
             name="funnel-outline"></ion-icon></ion-button>
       </ion-col>
     </ion-row>
+    
     <div class="filter-bar" *ngIf="show">
       <ion-row>
+        <ion-col></ion-col>
             <ion-col>
             <ion-item lines="none">
               <!-- <ion-label><ion-icon name="partly-sunny-outline"></ion-icon></ion-label> -->
@@ -25,6 +27,7 @@
               </ion-select>
             </ion-item>
           </ion-col>
+          <ion-col size="1"></ion-col>
           <ion-col>
             <ion-item lines="none">
               <!-- <ion-label><ion-icon name="shirt-outline"></ion-icon></ion-label> -->
@@ -34,30 +37,29 @@
               </ion-select>
             </ion-item>
           </ion-col>
-          
+          <ion-col></ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-item lines="none">
-            <ion-input disabled placeholder="Color & Style Filters Coming Soon!"></ion-input>
-          </ion-item>
+           <ion-text color="medium"><small>*Color & Style Filters Coming Soon!</small></ion-text>
+            <!-- <ion-input disabled placeholder="Color & Style Filters Coming Soon!"></ion-input> -->
         </ion-col>
       </ion-row>
-      
     </div>
   </ion-grid>
 
-  <div class="ion-padding" *ngFor="let item of userRack | filter:filterTerm; let i=index">
-    <ion-card (click)="openModal()">
+  <div class="ion-padding" *ngFor="let item of userRack | filter:filterTerm">
+    <ion-card (click)="openModal(item)">
+    <ion-card>
       <img alt="Default T-Shirt Image" src="assets/images/generic-top.jpg" />
+    </ion-card>
+    <ion-card>
       <ion-card-header>
         <ion-card-title>{{item.Title}} </ion-card-title>
         <ion-card-subtitle>#{{item.Season}} #{{item.Item_type}} </ion-card-subtitle>
       </ion-card-header>
-      <ion-card-content>
-       
-      </ion-card-content>
     </ion-card>
+  </ion-card>
   </div>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" id="new-rack-modal">

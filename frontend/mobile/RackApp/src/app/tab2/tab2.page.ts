@@ -28,12 +28,12 @@ export class Tab2Page {
   constructor(public service: RackService, private http: HttpClient, private modalCtrl: ModalController) {
   }
 
-  async openModal() {
+  async openModal(item:any) {
     const modal = await this.modalCtrl.create({
       component: ItemDetailsComponent,
     });
     modal.present();
-
+    console.log(item);
     const { data, role } = await modal.onWillDismiss();
 
     if (role === 'confirm') {
