@@ -29,7 +29,7 @@ export class DetailsPage implements OnInit {
 
   details() {
     let formData = this.detailsForm.value;
-    this.service.details(formData).subscribe({
+    this.service.userEdit(formData).subscribe({
         next: (result) => {
           console.log(result);
           alert('Nice getting to know you!');

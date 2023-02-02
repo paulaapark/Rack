@@ -4,12 +4,14 @@ import { Injectable } from '@angular/core';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
-  // baseUrl="https://rack-p.herokuapp.com/" //for production
-  baseUrl="http://localhost:3000/"
+  // baseUrl="https://rack-p.herokuapp.com/"; //for production
+  baseUrl="http://localhost:3000/";
+
   constructor(private http:HttpClient) { }
+  
   public currentUser: any = JSON.parse(localStorage.getItem('currentUser')!);
 
-  detailsURL:string= this.baseUrl + 'details/' + this.currentUser.id;
+  userURL:string= this.baseUrl + 'users/' + this.currentUser.id;
 
   login(formData:object){
     return this.http.post('http://localhost:3000/login', formData);
@@ -19,8 +21,8 @@ export class UserService {
     return this.http.post('http://localhost:3000/signup', formData);
   }
 
-  details(formData:object){
-    return this.http.post(this.detailsURL, formData);
+  userEdit(formData:object){
+    return this.http.patch(this.userURL, formData);
   }
 
   get_current_user(){

@@ -5,6 +5,9 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
+import { RackService } from 'src/app/services/rack.service';
 
 @Component({
   selector: 'app-item-details',
@@ -27,7 +30,8 @@ export class ItemDetailsComponent implements OnInit {
 
   constructor(private modalCtrl: ModalController, 
     private alertController: AlertController, 
-    private actionSheetCtrl: ActionSheetController) { }
+    private actionSheetCtrl: ActionSheetController, private http:HttpClient, private service:RackService,
+    private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.defaultView=true;
@@ -82,6 +86,7 @@ export class ItemDetailsComponent implements OnInit {
 
 
   async presentAlert() {
+    console.log(this.item.id);
     const alert = await this.alertController.create({
       header: 'Permanently delete from your Rack?',
       buttons: [
@@ -96,7 +101,7 @@ export class ItemDetailsComponent implements OnInit {
         },
         {
           text: 'Yes',
-          role: 'confirm',
+          role: 'delete',
           handler: () => {
             this.handlerMessage = 'Alert confirmed';
           },
@@ -107,15 +112,23 @@ export class ItemDetailsComponent implements OnInit {
     await alert.present();
 
     const { role } = await alert.onDidDismiss();
-    this.roleMessage = `Dismissed with role: ${role}`;
+    console.log(role);
+    if (role === 'delete'){
+      this.deleteItem().subscribe({
+        next: (result) => {
+          return this.modalCtrl.dismiss(this.item.Title, 'delete');
+        }
+        });
+
+    }
+
+  }
 
     //yes -> dismiss the modal & toast on tab 2 saying youve successfully deleted {{item.title}} from your rack
     //http delete method service & backend
-  }
 
-  onDelete(){
-    
-    
+  deleteItem(){
+    return this.http.delete(this.service.baseURL + '/' + this.item.id)
   }
 
 

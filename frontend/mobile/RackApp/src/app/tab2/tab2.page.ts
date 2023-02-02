@@ -1,8 +1,8 @@
-import { Component, ViewChild, OnInit} from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { RackService } from '../services/rack.service';
 // import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { ItemDetailsComponent } from '../components/item-details/item-details.component';
 
 @Component({
@@ -16,18 +16,19 @@ export class Tab2Page {
   userRack: any;
   public show: boolean = false;
   mainRackFunction: any;
-  selection!:any;
-  strSel!:any;
+  selection!: any;
+  strSel!: any;
 
   seasons = [];
   item_types = [];
-  
+
   // name!: string;
 
-  constructor(public service: RackService, private http: HttpClient, private modalCtrl: ModalController) {
+  constructor(public service: RackService, private http: HttpClient,
+    private modalCtrl: ModalController, private toastController: ToastController) {
   }
 
-  async openModal(item:any) {
+  async openModal(item: any) {
     const modal = await this.modalCtrl.create({
       component: ItemDetailsComponent,
       componentProps: {
@@ -37,15 +38,21 @@ export class Tab2Page {
 
     modal.present();
     console.log(item);
-    // const { data, role } = await modal.onWillDismiss();
+    const { data, role } = await modal.onWillDismiss();
 
-    // if (role === 'confirm') {
-    //   // this.message = `Hello, ${data}!`;
-    //   // console.log(`Hello, ${data}!`);
-    //   console.log('success');
-    // }
+    if (role === 'delete') {
+      console.log('deleted');
+      const toast = await this.toastController.create({
+        message: `${data} successfully deleted`,
+        duration: 2500,
+        position: 'bottom'
+      });
+
+      await toast.present();
+    }
   }
-  
+
+
 
   handleChange() {
     this.selection = this.seasons.concat(this.item_types);
@@ -64,12 +71,12 @@ export class Tab2Page {
     }
   }
 
-  handleSChange(e:any){
+  handleSChange(e: any) {
     this.seasons = (e.detail.value);
     this.handleChange();
   }
 
-  handleTChange(e:any){
+  handleTChange(e: any) {
     this.item_types = (e.detail.value);
     this.handleChange();
   }
@@ -85,7 +92,7 @@ export class Tab2Page {
     this.show = !this.show;
   }
 
-  getFilter(){
+  getFilter() {
     return this.http.get(this.service.userURL + this.strSel);
   }
 

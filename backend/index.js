@@ -42,9 +42,7 @@ config.authenticate().then(function(){
     console.log(err);
 });
 
-
-// app.get('/signup', function(req, res){ 
-// });
+//
 
 app.post('/signup', async (req, res) => {
     const { FirstName, LastName, Email, Password} = req.body;
@@ -56,36 +54,6 @@ app.post('/signup', async (req, res) => {
     }).catch((err) => {
         res.status(500).send(err);
     });
-});
-
-app.patch('/details/:id', function(req, res) {
-    const { Birthday, Gender, Image} = req.body;
-
-    let id = parseInt(req.params.id);
-    User.findByPk(id)
-    .then(function(result){
-        if(result){
-            result.Birthday = Birthday;
-            result.Gender = Gender;
-            result.Image = Image;
-            
-            //save record back to database
-            result.save().then(function(){
-                res.status(200).send(result);
-            })
-            .catch(function(err){
-                res.send(err);
-            });
-
-        }else{
-            res.status(404).send('User was not found');
-        }
-    })
-    .catch(function(err){
-        res.send(err);
-    });
-    
-    // res.redirect('/students');
 });
 
 app.post('/login', async (req, res) => {
@@ -117,6 +85,47 @@ app.post('/login', async (req, res) => {
         
 });
 
+//
+
+app.get('/users', function(req, res){
+    let user_data = {where: {}};
+    User.findAll(user_data).then(function(results){
+        res.status(200).send(results);
+    }).catch(function(err){
+        res.status(500).send(err);
+    });
+});
+
+app.patch('/users/:id', function(req, res) {
+    const { Birthday, Gender, Image} = req.body;
+
+    let id = parseInt(req.params.id);
+    User.findByPk(id)
+    .then(function(result){
+        if(result){
+            result.Birthday = Birthday;
+            result.Gender = Gender;
+            result.Image = Image;
+            
+            //save record back to database
+            result.save().then(function(){
+                res.status(200).send(result);
+            })
+            .catch(function(err){
+                res.send(err);
+            });
+
+        }else{
+            res.status(404).send('User was not found');
+        }
+    })
+    .catch(function(err){
+        res.send(err);
+    });
+    
+    // res.redirect('/details');
+});
+
 
 app.post('/rack', upload.single('image'), function(req, res){
     const {Title, Description, Season, Type, User_id} = req.body
@@ -134,16 +143,17 @@ app.post('/rack', upload.single('image'), function(req, res){
     }).catch((err) => {
         res.status(500).send(err);
     });
-})
+});
 
-app.get('/user', function(req, res){
-    let user_data = {where: {}};
-    User.findAll(user_data).then(function(results){
-        res.status(200).send(results);
+app.get('/rack/:id', function(req, res){
+    let id = parseInt(req.params.id);
+    Rack.findByPk(id)
+    .then(function(result){
+        res.status(200).send(result);
     }).catch(function(err){
         res.status(500).send(err);
     });
-});
+})
 
 app.get('/rack', function(req, res){
     let rack_data = {where: {}};
@@ -166,6 +176,64 @@ app.get('/rack', function(req, res){
     });
 
 });
+
+app.patch('/rack/:id', function(req, res) {
+    const { Title, Season, Item_type, Description, Image} = req.body;
+
+    let id = parseInt(req.params.id);
+    Rack.findByPk(id)
+    .then(function(result){
+        if(result){
+            result.Title = Title;
+            result.Season = Season;
+            result.Item_type = Item_type;
+            result.Description = Description;
+            result.Image = Image;
+            
+            //save record back to database
+            result.save().then(function(){
+                res.status(200).send(result);
+            })
+            .catch(function(err){
+                res.send(err);
+            });
+
+        }else{
+            res.status(404).send('Item was not found');
+        }
+    })
+    .catch(function(err){
+        res.send(err);
+    });
+    
+    // res.redirect('/rack');
+});
+
+
+
+
+
+app.delete('/rack/:id', function(req, res){
+    let id = parseInt(req.params.id); 
+
+    //find the item record
+    Rack.findByPk(id)
+    .then(function(result){
+        if(result){
+            result.destroy().then(function(){
+                res.status(200).send(result);
+            }).catch(function(err){
+                res.status(500).send(err);
+            });
+        }
+        else{
+            res.status(404).send('item was not found');
+        }
+    })
+    .catch(function(err){
+        res.send(err);
+    });
+})
 
 
 

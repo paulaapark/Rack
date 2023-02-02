@@ -7,6 +7,7 @@ import { UserService } from './user.service';
   providedIn: 'root'
 })
 export class RackService {
+  // baseUr:string ="https://rack-p.herokuapp.com/rack"; //for production
   baseURL:string = 'http://localhost:3000/rack';
   typeQuery:string = '&Item_type=';
   seasonQuery:string = '&Season=';
@@ -30,7 +31,7 @@ export class RackService {
     return this.http.get(this.userURL)
   };
 
-  
+    
 
   // getFilteredSeasons(){
   //   return this.http.get(this.userURL + this.seasonQuery + this.selectedSeasons)
