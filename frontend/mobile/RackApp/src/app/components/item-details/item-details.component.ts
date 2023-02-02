@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-item-details',
@@ -19,6 +21,10 @@ export class ItemDetailsComponent implements OnInit {
   handlerMessage = '';
   roleMessage = '';
 
+  
+
+  @Input("item") item:any;
+
   constructor(private modalCtrl: ModalController, 
     private alertController: AlertController, 
     private actionSheetCtrl: ActionSheetController) { }
@@ -32,7 +38,7 @@ export class ItemDetailsComponent implements OnInit {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  cancelEdit(){
+  cancel(){
     this.defaultView=true;
     this.editView=false;
     console.log('cancel edit')

@@ -21,7 +21,6 @@ export class Tab2Page {
 
   seasons = [];
   item_types = [];
-
   
   // name!: string;
 
@@ -31,16 +30,20 @@ export class Tab2Page {
   async openModal(item:any) {
     const modal = await this.modalCtrl.create({
       component: ItemDetailsComponent,
+      componentProps: {
+        'item': item
+      }
     });
+
     modal.present();
     console.log(item);
-    const { data, role } = await modal.onWillDismiss();
+    // const { data, role } = await modal.onWillDismiss();
 
-    if (role === 'confirm') {
-      // this.message = `Hello, ${data}!`;
-      // console.log(`Hello, ${data}!`);
-      console.log('success');
-    }
+    // if (role === 'confirm') {
+    //   // this.message = `Hello, ${data}!`;
+    //   // console.log(`Hello, ${data}!`);
+    //   console.log('success');
+    // }
   }
   
 
@@ -86,13 +89,5 @@ export class Tab2Page {
     return this.http.get(this.service.userURL + this.strSel);
   }
 
-
-  // showDetails(){
-  //   console.log(this.userRack);
-
-  //   //want to get the id and use it to get info in either a modal or something
-
-
-  // }
 }
 
