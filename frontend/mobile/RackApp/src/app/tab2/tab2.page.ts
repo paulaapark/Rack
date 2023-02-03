@@ -12,12 +12,17 @@ import { ItemDetailsComponent } from '../components/item-details/item-details.co
 })
 export class Tab2Page {
 
+
+
   filterTerm: string = '';
   userRack: any;
   public show: boolean = false;
+  public grid: boolean = false;
   mainRackFunction: any;
   selection!: any;
   strSel!: any;
+
+  gridToggle!:any;
 
   seasons = [];
   item_types = [];
@@ -26,6 +31,12 @@ export class Tab2Page {
 
   constructor(public service: RackService, private http: HttpClient,
     private modalCtrl: ModalController, private toastController: ToastController) {
+      // if(this.grid = true){
+      //   this.gridToggle = 'width=50%';
+      // }
+      // else {
+      //   this.gridToggle = '';
+      // }
   }
 
   async openModal(item: any) {
@@ -99,6 +110,8 @@ export class Tab2Page {
     this.mainRackFunction.subscribe((res: any) => {
       this.userRack = Object.values(res);
     });
+
+    
   }
 
   toggle() {
@@ -107,6 +120,10 @@ export class Tab2Page {
 
   getFilter() {
     return this.http.get(this.service.userURL + this.strSel);
+  }
+
+  gridButton(){
+    this.grid = !this.grid;
   }
 
 }
