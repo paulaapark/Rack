@@ -37,7 +37,7 @@ export class Tab2Page {
     });
 
     modal.present();
-    console.log(item);
+    // console.log(item);
     const { data, role } = await modal.onWillDismiss();
 
     if (role === 'delete') {
@@ -50,6 +50,19 @@ export class Tab2Page {
 
       await toast.present();
     }
+
+    if (role === 'save') {
+      console.log('item updated');
+      const toast = await this.toastController.create({
+        message: `${data} successfully updated`,
+        duration: 2500,
+        position: 'bottom'
+      });
+
+      await toast.present();
+    }
+
+    
   }
 
 

@@ -216,7 +216,6 @@ app.patch('/rack/:id', function(req, res) {
 app.delete('/rack/:id', function(req, res){
     let id = parseInt(req.params.id); 
 
-    //find the item record
     Rack.findByPk(id)
     .then(function(result){
         if(result){

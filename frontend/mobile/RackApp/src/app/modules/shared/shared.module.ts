@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { RackService } from 'src/app/services/rack.service';
 import { ItemDetailsComponent } from 'src/app/components/item-details/item-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,9 @@ import { ItemDetailsComponent } from 'src/app/components/item-details/item-detai
   imports: [
     CommonModule,
     IonicModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [ DefaultHeadComponent, ItemDetailsComponent ],
 })

@@ -4,7 +4,7 @@ import { ModalController, AlertController } from '@ionic/angular';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RackService } from 'src/app/services/rack.service';
@@ -14,8 +14,9 @@ import { RackService } from 'src/app/services/rack.service';
   templateUrl: './item-details.component.html',
   styleUrls: ['./item-details.component.scss'],
 })
+
+
 export class ItemDetailsComponent implements OnInit {
-  // name!: string;
   defaultView!:boolean;
   editView!:boolean;
 
@@ -24,18 +25,31 @@ export class ItemDetailsComponent implements OnInit {
   handlerMessage = '';
   roleMessage = '';
 
-  
+  itemForm:FormGroup;
 
-  @Input("item") item:any;
+  @Input() item:any;
 
   constructor(private modalCtrl: ModalController, 
     private alertController: AlertController, 
     private actionSheetCtrl: ActionSheetController, private http:HttpClient, private service:RackService,
-    private router:Router, private route:ActivatedRoute) { }
+    private router:Router, private route:ActivatedRoute, private formBuilder: FormBuilder) {
+
+      this.itemForm = formBuilder.group({
+      Title: [''],
+      Description: [''],
+      Season: [''],
+      Item_type: ['']
+    });
+
+  }
+
+    //If null, dont update 
 
   ngOnInit() {
     this.defaultView=true;
     this.editView=false;
+    console.log(this.item);
+    this.itemForm.patchValue(this.item);
   }
 
   back() {
@@ -50,10 +64,74 @@ export class ItemDetailsComponent implements OnInit {
 
   edit() {
     console.log('edit');
-    // return this.modalCtrl.dismiss(this.name, 'confirm');
-    // return this.modalCtrl.dismiss(null, 'confirm');
     this.defaultView = false;
     this.editView = true;
+  }
+
+  
+
+  save() {
+    let formData = this.itemForm.value;
+    this.editItem(formData).subscribe({
+      next: (result) => {
+        console.log(result);
+        alert('Item edited');
+      },
+      error: error => {
+        alert('Unsuccessful');
+        console.error(error);
+      }
+    })
+    console.log('save');
+    // return this.modalCtrl.dismiss(this.name, 'confirm');
+    return this.modalCtrl.dismiss(this.item.Title, 'save');
+    // load & apply changes, toast successful item update
+    
+  }
+
+
+  async presentAlert() {
+    console.log(this.item.id);
+    const alert = await this.alertController.create({
+      header: 'Permanently delete from your Rack?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            this.handlerMessage = 'Alert canceled';
+          },
+        },
+        {
+          text: 'OK',
+          role: 'delete',
+          handler: () => {
+            this.handlerMessage = 'Alert confirmed';
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log(role);
+    if (role === 'delete'){
+      this.deleteItem().subscribe({
+        next: (result) => {
+          return this.modalCtrl.dismiss(this.item.Title, 'delete');
+        }
+        });
+    }
+
+  }
+
+  deleteItem(){
+    return this.http.delete(this.service.baseURL + '/' + this.item.id)
+  }
+
+  editItem(formData:object){
+    return this.http.patch(this.service.baseURL + '/' + this.item.id, formData)
   }
 
   takePicture(){
@@ -77,60 +155,20 @@ export class ItemDetailsComponent implements OnInit {
     snapPicture();
   }
 
-  onSubmit() {
-    console.log('confirm');
-    // return this.modalCtrl.dismiss(this.name, 'confirm');
-    return this.modalCtrl.dismiss(null, 'confirm');
-    //load & apply changes, toast successful item update 
+
+  get TitleFormControl(){
+    return this.itemForm.get('Title')!;
   }
 
-
-  async presentAlert() {
-    console.log(this.item.id);
-    const alert = await this.alertController.create({
-      header: 'Permanently delete from your Rack?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            this.handlerMessage = 'Alert canceled';
-          },
-
-          //cancel -> back to the edit page?
-        },
-        {
-          text: 'Yes',
-          role: 'delete',
-          handler: () => {
-            this.handlerMessage = 'Alert confirmed';
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-    console.log(role);
-    if (role === 'delete'){
-      this.deleteItem().subscribe({
-        next: (result) => {
-          return this.modalCtrl.dismiss(this.item.Title, 'delete');
-        }
-        });
-
-    }
-
+  get DescriptionFormControl(){
+    return this.itemForm.get('Description')!;
   }
 
-    //yes -> dismiss the modal & toast on tab 2 saying youve successfully deleted {{item.title}} from your rack
-    //http delete method service & backend
-
-  deleteItem(){
-    return this.http.delete(this.service.baseURL + '/' + this.item.id)
+  get SeasonFormControl(){
+    return this.itemForm.get('Season')!;
   }
 
-
-
+  get TypeFormControl(){
+    return this.itemForm.get('Item_type')!;
+  }
 }

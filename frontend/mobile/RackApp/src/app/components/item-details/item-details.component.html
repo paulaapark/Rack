@@ -20,7 +20,7 @@
       </ion-buttons>
       <ion-title>Edit Item</ion-title>
       <ion-buttons slot="end">
-        <ion-button (click)="onSubmit()">Save</ion-button>
+        <ion-button (click)="save()">Save</ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
@@ -53,7 +53,7 @@
   <div *ngIf="editView">
 
     <ion-card>
-      <form>
+      <form [formGroup]="itemForm">
         <ion-card>
           <img src="assets/images/generic-top.jpg" alt="">
         </ion-card>
@@ -63,13 +63,13 @@
         </ion-chip>
         <ion-card>
           <ion-item>
-            <ion-label position="stacked">Title</ion-label>
-            <ion-input placeholder={{item.Title}}></ion-input>
+            <ion-label position="stacked" >Title</ion-label>
+            <ion-input formControlName="Title" ></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label><ion-icon name="partly-sunny-outline"></ion-icon>Season</ion-label>
-            <ion-select interface="popover" placeholder={{item.Season}} formControlName="Season">
+            <ion-select interface="popover" formControlName="Season">
               <ion-select-option name="Season" value="&Season=Spring">Spring</ion-select-option>
               <ion-select-option name="Season" value="&Season=Summer">Summer</ion-select-option>
               <ion-select-option name="Season" value="&Season=Fall">Fall</ion-select-option>
@@ -78,14 +78,14 @@
           </ion-item>
           <ion-item>
             <ion-label><ion-icon name="shirt-outline"></ion-icon>Type</ion-label>
-            <ion-select interface="popover" placeholder={{item.Item_type}} formControlName="Item_type">
+            <ion-select interface="popover" formControlName="Item_type">
               <ion-select-option name="Item_type" value="&Item_type=Top">Top</ion-select-option>
               <ion-select-option name="Item_type" value="&Item_type=Bottom">Bottom</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item lines="none">
             <ion-label position="stacked">Description</ion-label>
-            <ion-textarea placeholder={{item.Description}} [autoGrow]="true" value="">
+            <ion-textarea placeholder={{item.Description}} value={{item.Description}} [autoGrow]="true" value="" formControlName="Description">
             </ion-textarea>
           </ion-item>
         </ion-card>
