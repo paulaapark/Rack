@@ -8,7 +8,6 @@ export class UserService {
   // environment:string = 'development';
   // environment:string = 'production';
 
-
   constructor(private http:HttpClient) { 
     // if (this.environment === 'development'){
     //   this.baseUrl = "http://localhost:3000/"
@@ -20,8 +19,8 @@ export class UserService {
 
   
   public currentUser: any = JSON.parse(localStorage.getItem('currentUser')!);
-
-  userURL:string= this.baseUrl + 'users/' + this.currentUser.id;
+  
+  
 
   login(formData:object){
     return this.http.post(this.baseUrl + 'login', formData);
@@ -31,16 +30,17 @@ export class UserService {
     return this.http.post(this.baseUrl + 'signup', formData);
   }
 
-  userEdit(formData:object){
-    return this.http.patch(this.userURL, formData);
-  }
-
   get_current_user(){
     return JSON.parse(localStorage.getItem('currentUser')!);
   }
 
   isAuthenticated(){
     return this.get_current_user() ? true: false;
+  }
+
+  userEdit(formData:object){
+    let userURL = this.baseUrl + 'users/' + this.currentUser.id;
+    return this.http.patch(userURL, formData);
   }
   
 };

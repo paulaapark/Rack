@@ -39,7 +39,9 @@ export class BuilderInputPage implements OnInit {
   max:number = 7;
   rand:number = Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
 
-
+  yay:boolean = false;
+  nay:boolean = false;
+  
   constructor(public userService: UserService, public rackService: RackService, private formBuilder: FormBuilder, private http: HttpClient) {
     if (this.hrs < 12) {
       this.timeOfDay = 'morning';
@@ -141,5 +143,11 @@ export class BuilderInputPage implements OnInit {
   showResults(){
     this.loading = false;
     this.results = true;
+    if (this.generatedItems.length < 0){
+      this.yay = true;
+    }
+    else {
+      this.nay = true;
+    }
   };
 }

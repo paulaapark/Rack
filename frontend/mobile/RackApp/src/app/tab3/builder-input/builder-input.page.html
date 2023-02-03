@@ -16,10 +16,19 @@
           <ion-label> Item #{{i + 1}}</ion-label>
           <ion-button slot="icon-only" fill="clear" *ngIf="builderForm.controls.items.controls.length > 1" (click)="deleteItem(i)"><ion-icon name="trash-outline"></ion-icon></ion-button>
         </div> -->
-          <h5> Item #{{i + 1}}
-            <ion-button slot="icon-only" fill="clear" *ngIf="builderForm.controls.items.controls.length > 1"
-              (click)="deleteItem(i)"><ion-icon name="trash-outline"></ion-icon></ion-button>
-          </h5>
+        <ion-grid>
+          <ion-row>
+            <ion-col></ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-item>
+          <ion-label class="fw-bold">Item #{{i + 1}}</ion-label>
+          <ion-icon type="button" name="trash-outline" slot="end" *ngIf="builderForm.controls.items.controls.length > 1"
+            (click)="deleteItem(i)" color="primary"></ion-icon>
+              <!-- <ion-button slot="end" fill="clear" *ngIf="builderForm.controls.items.controls.length > 1"
+              (click)="deleteItem(i)"><ion-icon name="trash-outline" ></ion-icon></ion-button> -->
+        </ion-item>
+          
           <div [formGroupName]="i">
             <ion-list>
               <ion-item>
@@ -50,7 +59,7 @@
       </div>
       <ion-button fill="clear" (click)="addItem()">Add another item?</ion-button>
       <br>
-      <ion-button expand="block" (click)="onSubmit()">Generate!</ion-button>
+      <ion-button expand="block" (click)="onSubmit()" [disabled]="!builderForm.valid">Generate!</ion-button>
     </form>
   </div>
 
@@ -84,11 +93,22 @@
     </div>
     
     <br>
-    <h5>Hope this does the trick!</h5>
-    <br>
-    <br>
-    <br>
-    <ion-text>I think we make a great team! <a routerLink="../../../feedback">Do you?</a></ion-text>
+    <div *ngIf="yay">
+      <h5>Hope this does the trick!</h5>
+      <br>
+      <br>
+      <br>
+      <ion-text>I think we make a great team! <a routerLink="../../../feedback">Do you?</a></ion-text>
+    </div>
+
+    <div *ngIf="nay">
+      <h5>Sorry, looks like nothing in your Rack was a match.</h5>
+      <br>
+      <br>
+      <br>
+      <ion-text color="primary">Maybe it's time to go shopping!</ion-text>
+    </div>
+    
   </div>
 
 </ion-content>
