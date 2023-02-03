@@ -26,6 +26,7 @@ export class ItemDetailsComponent implements OnInit {
   roleMessage = '';
 
   itemForm:FormGroup;
+  itemURL!:string;
 
   @Input() item:any;
 
@@ -43,13 +44,13 @@ export class ItemDetailsComponent implements OnInit {
 
   }
 
-    //If null, dont update 
-
   ngOnInit() {
     this.defaultView=true;
     this.editView=false;
     console.log(this.item);
     this.itemForm.patchValue(this.item);
+
+    this.itemURL = this.service.baseURL + '/' + this.item.id;
   }
 
   back() {
@@ -127,11 +128,11 @@ export class ItemDetailsComponent implements OnInit {
   }
 
   deleteItem(){
-    return this.http.delete(this.service.baseURL + '/' + this.item.id)
+    return this.http.delete(this.itemURL)
   }
 
   editItem(formData:object){
-    return this.http.patch(this.service.baseURL + '/' + this.item.id, formData)
+    return this.http.patch(this.itemURL, formData)
   }
 
   takePicture(){

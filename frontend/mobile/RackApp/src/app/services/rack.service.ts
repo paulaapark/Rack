@@ -7,15 +7,22 @@ import { UserService } from './user.service';
   providedIn: 'root'
 })
 export class RackService {
-  // baseUr:string ="https://rack-p.herokuapp.com/rack"; //for production
-  baseURL:string = 'http://localhost:3000/rack';
+  // baseURL:string ="https://rack-p.herokuapp.com/rack"; //for production
+  baseURL!:string; //for development
   typeQuery:string = '&Item_type=';
   seasonQuery:string = '&Season=';
 
   selectedSeasons:string='';
   selectedTypes:string='';
   
-  constructor(private http:HttpClient, public service:UserService) { }
+  constructor(private http:HttpClient, public service:UserService) { 
+    if (service.environment ==='development'){
+      this.baseURL = 'http://localhost:3000/rack'
+    }
+    else {
+      this.baseURL = 'https://rack-p.herokuapp.com/rack'
+    };
+  }
   public currentUser: any = this.service.currentUser;
   userURL:string = this.baseURL + '?User_id=' + this.currentUser.id;
 
@@ -30,19 +37,6 @@ export class RackService {
   getUserRack(){
     return this.http.get(this.userURL)
   };
-
-    
-
-  // getFilteredSeasons(){
-  //   return this.http.get(this.userURL + this.seasonQuery + this.selectedSeasons)
-  // };
-  // getFilteredTypes(){
-  //   return this.http.get(this.userURL + this.typeQuery + this.selectedTypes)
-  // };
-
-  // getFilteredMulti(){
-  //   return this.http.get(this.userURL + this.seasonQuery + this.selectedSeasons + this.typeQuery + this.selectedTypes)
-  // };
 
   getUserTops(){
     return this.http.get(this.userURL + this.typeQuery + 'Top')
