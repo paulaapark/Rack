@@ -29,23 +29,24 @@
 <div>
   <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-buttons slot="start">
+      <ion-icon class="ion-padding" type="button" slot="start" name="camera-outline" (click)="takePicture()" color="primary" size="large"></ion-icon>
+      <!-- <ion-buttons slot="start">
         <ion-button slot="icon-only" (click)="takePicture()">
           <ion-icon name="camera-outline"></ion-icon>
         </ion-button>
-      </ion-buttons>
+      </ion-buttons> -->
       <ion-buttons slot="end" >
         
           <!-- the router isnt working.. maybe because this is the default head? -->
-        <ion-button slot="icon-only" size="large" routerLink="../profile" disabled >
-          <ion-icon name="person-circle-outline"></ion-icon>
-          <!-- <ion-avatar> <img alt="Profile Pic" src="https://ionicframework.com/docs/img/demos/avatar.svg" /> </ion-avatar> make the src image binding of persons pic. if they dont have a pic, make that ion-icon the default img-->
+        <ion-button slot="icon-only"  routerLink="../profile" disabled >
+          <ion-icon name="person-circle-outline" size="large"></ion-icon>
+          <!-- <ion-avatar> <img alt="Profile Pic" src="https://ionicframework.com/docs/img/demos/avatar.svg" /> </ion-avatar> make the src image binding of persons pic. if they dont have a pic, make that ion-icon the default img -->
         </ion-button>
       
         <ion-menu-toggle>
-          <ion-button>
-          <ion-icon name="ellipsis-vertical"></ion-icon>
-        </ion-button>
+          <ion-button fill="clear">
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </ion-button>
         </ion-menu-toggle>
       </ion-buttons>
       
