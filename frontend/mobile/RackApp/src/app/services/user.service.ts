@@ -4,18 +4,18 @@ import { Injectable } from '@angular/core';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
-  baseUrl!:string; 
+  baseUrl:string = 'http://localhost:3000/'; 
   // environment:string = 'development';
-  environment:string = 'production';
+  // environment:string = 'production';
 
 
   constructor(private http:HttpClient) { 
-    if (this.environment === 'development'){
-      this.baseUrl = "http://localhost:3000/"
-    }
-    else {
-      this.baseUrl = 'https://rack-p.herokuapp.com/'
-    }
+    // if (this.environment === 'development'){
+    //   this.baseUrl = "http://localhost:3000/"
+    // }
+    // else {
+    //   this.baseUrl = 'https://rack-p.herokuapp.com/'
+    // }
   }
 
   
